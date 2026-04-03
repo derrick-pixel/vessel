@@ -69,6 +69,21 @@
   --max-width: 1140px;
 }
 
+/* ── Legacy variable aliases (backward compat for inner pages) ── */
+:root {
+  --charcoal:   #32332d;      /* → on-surface */
+  --deep:       #0e0e0c;      /* → inverse-surface */
+  --white:      #ffffff;      /* → surface-0 */
+  --light:      #f6f3ee;      /* → surface-1 */
+  --mid:        #5f5f59;      /* → on-surface-v */
+  --muted:      #7b7b74;      /* → outline */
+  --border:     #e4e3db;      /* → surface-4 */
+  --gold:       #725b3f;      /* → secondary */
+  --gold-light: #eecfac;      /* → secondary-fixed-dim */
+  --gold-pale:  #fdddb9;      /* → secondary-fixed */
+  --accent-red: #9f403d;      /* → error */
+}
+
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; }
