@@ -9,7 +9,11 @@
       "Bash(curl -sL \"https://lh3.googleusercontent.com/aida/ADBb0uiu_auU4TwKb8fdU8qOqJG63WFZZq7H8zOiaaIyMwX8boHrfDBv4LDx86t1wrP7XWvHYLFszbeihbbKoSF9GVu9-a3XQqE0dAm92eDY4x6Yn0WreEHVfgK3otiRm_zxrZtsbqt4MJeY0nbjH-skXXZ2U4wopgA6m6-EumkrJJDuoR-dCBBOrxDpg_u558OSFjLuYI9BnTESMck7z1LVWJKhfiJU4948rSdfl_vABLBfTh_mHM7-yAODHp8\" -o accreditation.jpg)",
       "Bash(git add:*)",
       "Bash(git commit -m ':*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(git commit -m 'Fix religion nav bar transparency on knowledge page:*)",
+      "Bash(git commit:*)",
+      "Bash(grep:*)",
+      "WebSearch"
     ]
   }
 }
