@@ -524,7 +524,10 @@
           </div>
           <div class="form-group"><label>Mobile Number</label><input type="tel" required placeholder="+65 9XXX XXXX" /></div>
           <div class="form-group"><label>Email Address</label><input type="email" required placeholder="you@email.com" /></div>
-          <div class="form-group"><label>Delivery Address</label><input id="co-address" type="text" required placeholder="Block / Street / Unit, Singapore XXXXXX" /></div>
+          <div class="form-row">
+            <div class="form-group" style="flex:2;"><label>Delivery Address</label><input id="co-address" type="text" required placeholder="Block / Street / Unit" /></div>
+            <div class="form-group" style="flex:1;"><label>Postal Code</label><input id="co-postal" type="text" required placeholder="123456" maxlength="6" pattern="\d{6}" inputmode="numeric" /></div>
+          </div>
           <div class="form-group">
             <label>Required Delivery Time</label>
             <select id="co-delivery" required onchange="updateDeliverySurcharge()">
@@ -695,9 +698,7 @@
 
         // Build reference: LASTNAME + postal code extracted from address
         const lastName = (document.getElementById('co-lastname').value || '').trim().toUpperCase();
-        const address = document.getElementById('co-address').value || '';
-        const postalMatch = address.match(/\d{6}/);
-        const postal = postalMatch ? postalMatch[0] : '';
+        const postal = (document.getElementById('co-postal').value || '').trim();
         const reference = (lastName + ' ' + postal).trim();
 
         // Generate QR
