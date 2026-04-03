@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__stitch__list_screens",
+      "Bash(mkdir -p /Users/derrickteo/casket/images)",
+      "Bash(curl -sL \"https://lh3.googleusercontent.com/aida/ADBb0ujywbIFMjJCYz70kj9hBNda32fshWBBltcVRvs-ZbpymGjVwCUolusNBhPPVpM_K3dMO6lSvP8NY-lLW_cM9yM7G3b6g9KWPZzmY7ZdQaZzhG1OCXBGDbyQ_dtU-hwrLcHkhyfuqy5yCgFjUFHmRpiEaaoLfxLLdAx2gQcw-LBi4RrW9-UxyQDWUczKj_BJsuq5_qjYRGOJ5qvc7mOV_u1LkEzfIiZUeCrRFT2fsF7RMmFu1jUY3vZqmto\" -o landing.jpg)",
+      "Bash(curl -sL \"https://lh3.googleusercontent.com/aida/ADBb0uhiCjGSwrIhh9K9EqvHt_hDxycSjLlToRYD-Bra8ujiTbjvKxNMpjT6EhnL2DbkqbCln9KPSL_DHkPWyYy0AR6IKHAC4vx3mnWdrg1FQ23AIporbcwG6ZVx0z_6hDfrBQM9c8kD-nlhlCvF3ibATCVLm81r8RcfdRcZCFv-muguqePA83eA5vzH7N5GP274oroWyE-ANZT0IN0sNliUixGkf0SqbEzy2BKmwqF-y-FUB-sECvddIkYeeGns\" -o landing2.jpg)",
+      "Bash(curl -sL \"https://lh3.googleusercontent.com/aida/ADBb0uiarvCCamfQn91JLV4sLE_-_9RYG31Vf5MwQMhcKqCIzayP4PLmcksIaT6ZNyY6o3Ls0_DWz4nhAzk-y2rjge2V6Snt89DBola1YiDE_YtePYtHa0JpBTD3Is1GhA0dNrOrSPuom97f--eDBhxu9fPPTD2OlGIqjScAWjlvwi3o88keD9ULx-Vz0WTdSg3Cdk1mZJc_QP82UfKWC8Y7xAhxSPBdgQHFg-gt239v5VDP5eGDahSoiYQpwrB5\" -o products1.jpg)",
+      "Bash(curl -sL \"https://lh3.googleusercontent.com/aida/ADBb0uiu_auU4TwKb8fdU8qOqJG63WFZZq7H8zOiaaIyMwX8boHrfDBv4LDx86t1wrP7XWvHYLFszbeihbbKoSF9GVu9-a3XQqE0dAm92eDY4x6Yn0WreEHVfgK3otiRm_zxrZtsbqt4MJeY0nbjH-skXXZ2U4wopgA6m6-EumkrJJDuoR-dCBBOrxDpg_u558OSFjLuYI9BnTESMck7z1LVWJKhfiJU4948rSdfl_vABLBfTh_mHM7-yAODHp8\" -o accreditation.jpg)",
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)",
+      "Bash(git push:*)"
+    ]
+  }
+}

@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FAQ & Your Rights — Passage</title>
   <meta name="description" content="Know your rights as a consumer. How to handle funeral director pressure. Real answers for grieving families in Singapore." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  
+  
+  
   <link rel="stylesheet" href="styles.css" />
   <style>
     .page-body { padding-top: 108px; }
 
-    .page-header { background: var(--charcoal); padding: 64px 0 56px; text-align: center; color: var(--white); }
-    .page-header h1 { color: var(--white); margin-bottom: 16px; }
-    .page-header p { color: rgba(255,255,255,0.7); max-width: 600px; margin: 0 auto; }
+    .page-header { background: var(--primary); padding: 64px 0 56px; text-align: center; color: var(--primary-on); }
+    .page-header h1 { color: var(--primary-on); margin-bottom: 16px; }
+    .page-header p { color: rgba(242,249,249,0.75); max-width: 600px; margin: 0 auto; }
 
     /* Tab navigation */
     .tab-nav {
@@ -38,17 +38,17 @@
       background: none;
     }
     .tab-btn:hover { color: var(--charcoal); }
-    .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .tab-btn.active { color: var(--secondary); border-bottom-color: var(--secondary); }
 
     /* Rights alert */
     .rights-alert {
-      background: var(--charcoal);
+      background: var(--primary);
       border-left: 4px solid var(--gold);
       border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
       padding: 24px 28px;
       margin-bottom: 40px;
     }
-    .rights-alert h3 { color: var(--gold); font-family: var(--font-serif); margin-bottom: 10px; }
+    .rights-alert h3 { color: var(--secondary); font-family: var(--font-serif); margin-bottom: 10px; }
     .rights-alert p { color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.7; }
 
     /* Accordion */
@@ -59,9 +59,9 @@
       transition: var(--transition); width: 100%; text-align: left;
     }
     .accordion__trigger:hover { background: var(--light); }
-    .accordion.open .accordion__trigger { background: var(--gold-pale); }
+    .accordion.open .accordion__trigger { background: var(--secondary-fixed-dim); }
     .accordion__question { font-weight: 600; font-size: 0.95rem; color: var(--charcoal); line-height: 1.4; }
-    .accordion__icon { font-size: 1.2rem; color: var(--gold); flex-shrink: 0; margin-left: 16px; transition: transform 0.25s; }
+    .accordion__icon { font-size: 1.2rem; color: var(--secondary); flex-shrink: 0; margin-left: 16px; transition: transform 0.25s; }
     .accordion.open .accordion__icon { transform: rotate(45deg); }
     .accordion__body { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
     .accordion__content { padding: 0 24px 20px; border-top: 1px solid var(--border); }
@@ -69,11 +69,11 @@
     .accordion__content ul { margin: 12px 0 4px 0; padding-left: 20px; }
     .accordion__content ul li { font-size: 0.875rem; color: var(--mid); margin-bottom: 8px; line-height: 1.6; list-style: disc; }
     .accordion__content .tip {
-      background: var(--gold-pale); border-radius: var(--radius);
+      background: var(--secondary-fixed-dim); border-radius: var(--radius);
       padding: 12px 16px; margin-top: 14px;
       font-size: 0.85rem; color: var(--charcoal); line-height: 1.6;
     }
-    .accordion__content .tip strong { color: var(--gold); }
+    .accordion__content .tip strong { color: var(--secondary); }
     .accordion__content .warning {
       background: #fff8f0; border: 1px solid #f0c97a;
       border-radius: var(--radius); padding: 12px 16px; margin-top: 14px;
@@ -82,27 +82,27 @@
 
     /* Script card */
     .script-card {
-      background: var(--deep);
+      background: var(--inverse-surface);
       border-radius: var(--radius-lg);
       padding: 28px;
       margin: 28px 0;
     }
     .script-card__label {
       font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 12px;
+      color: var(--secondary); margin-bottom: 12px;
     }
     .script-card__text {
-      font-size: 0.95rem; color: var(--white); line-height: 1.75; font-style: italic;
+      font-size: 0.95rem; color: var(--primary-on); line-height: 1.75; font-style: italic;
       border-left: 2px solid var(--gold); padding-left: 16px;
     }
 
     /* Testimonials */
     .testimonials-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; }
     .testimonial { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; }
-    .testimonial__stars { color: var(--gold); margin-bottom: 12px; }
+    .testimonial__stars { color: var(--secondary); margin-bottom: 12px; }
     .testimonial__body { font-size: 0.9rem; line-height: 1.7; color: var(--mid); font-style: italic; margin-bottom: 20px; }
     .testimonial__author { display: flex; align-items: center; gap: 12px; }
-    .testimonial__avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--gold-pale); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; color: var(--gold); }
+    .testimonial__avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--secondary-fixed-dim); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; color: var(--secondary); }
     .testimonial__name { font-size: 0.875rem; font-weight: 600; }
     .testimonial__detail { font-size: 0.75rem; color: var(--muted); }
 
@@ -114,7 +114,7 @@
     .animate.visible { opacity: 1; transform: translateY(0); }
 
     /* Mobile nav */
-    .nav__mobile { background: var(--charcoal); max-height: 0; overflow: hidden; transition: max-height 0.3s ease; border-top: 1px solid rgba(255,255,255,0.06); }
+    .nav__mobile { background: var(--primary); max-height: 0; overflow: hidden; transition: max-height 0.3s ease; border-top: 1px solid rgba(255,255,255,0.06); }
     .nav__mobile.open { max-height: 400px; }
     .nav__mobile ul { padding: 16px 24px; display: flex; flex-direction: column; gap: 4px; }
     .nav__mobile a { display: block; padding: 10px 0; font-size: 0.9rem; color: rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.06); }
@@ -133,7 +133,7 @@
   </div>
   <nav class="nav">
     <div class="nav__inner">
-      <a href="index.html" class="nav__logo">Pass<span>age</span></a>
+      <a href="index.html" class="nav__logo">PASS<span>AGE</span></a>
       <ul class="nav__links">
         <li><a href="index.html">Home</a></li>
         <li><a href="products.html">Our Caskets</a></li>
@@ -520,7 +520,7 @@
     <div class="container">
       <div class="footer__grid">
         <div>
-          <p class="footer__brand">Pass<span>age</span></p>
+          <p class="footer__brand">PASS<span>AGE</span></p>
           <p class="footer__tagline">"Because grief is burden enough."</p>
           <p style="font-size:0.8rem; line-height:1.7;">Assembled in Singapore. Sustainably sourced. A social enterprise — 30% of net profits donated to charity.</p>
         </div>

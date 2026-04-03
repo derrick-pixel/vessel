@@ -5,26 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Our Caskets & Prices — Passage</title>
   <meta name="description" content="Three dignified casket models from S$800. Fully transparent pricing. Delivered across Singapore within 3 hours. No hidden fees." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  
+  
+  
   <link rel="stylesheet" href="styles.css" />
   <style>
     .page-body { padding-top: 108px; }
 
     /* Page header */
     .page-header {
-      background: var(--charcoal);
+      background: var(--primary);
       padding: 64px 0 56px;
       text-align: center;
-      color: var(--white);
+      color: var(--primary-on);
     }
-    .page-header h1 { color: var(--white); margin-bottom: 16px; }
-    .page-header p { color: rgba(255,255,255,0.7); max-width: 560px; margin: 0 auto; }
+    .page-header h1 { color: var(--primary-on); margin-bottom: 16px; }
+    .page-header p { color: rgba(242,249,249,0.75); max-width: 560px; margin: 0 auto; }
 
     /* Guarantee bar */
     .guarantee-bar {
-      background: var(--deep);
+      background: var(--inverse-surface);
       padding: 14px 0;
       border-bottom: 1px solid rgba(255,255,255,0.06);
     }
@@ -34,9 +34,9 @@
     }
     .guarantee-item {
       display: flex; align-items: center; gap: 8px;
-      font-size: 0.8rem; font-weight: 500; color: rgba(255,255,255,0.7);
+      font-size: 0.8rem; font-weight: 500; color: rgba(242,249,249,0.75);
     }
-    .guarantee-item span:first-child { color: var(--gold); }
+    .guarantee-item span:first-child { color: var(--secondary); }
 
     /* Product section */
     .product-section {
@@ -67,7 +67,7 @@
       margin-bottom: 16px;
     }
     .product-section.alt .product-visual__main { background: #e8e8e4; }
-    .product-visual__main.dark { background: var(--charcoal); }
+    .product-visual__main.dark { background: var(--primary); }
     .product-thumbs {
       display: flex; gap: 10px;
     }
@@ -81,7 +81,7 @@
       font-size: 1.8rem;
       transition: var(--transition);
     }
-    .product-thumb:hover, .product-thumb.active { border-color: var(--gold); }
+    .product-thumb:hover, .product-thumb.active { border-color: var(--secondary); }
 
     /* Product info */
     .product-tag { margin-bottom: 12px; }
@@ -89,13 +89,13 @@
     .product-tagline { font-size: 1.05rem; color: var(--muted); margin-bottom: 24px; font-style: italic; }
 
     .price-block {
-      background: var(--gold-pale);
+      background: var(--secondary-fixed-dim);
       border: 1px solid rgba(184,150,90,0.3);
       border-radius: var(--radius-lg);
       padding: 24px;
       margin-bottom: 28px;
     }
-    .price-block__label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .price-block__label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--secondary); margin-bottom: 6px; }
     .price-block__main { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
     .price-block__amount { font-family: var(--font-serif); font-size: 2.8rem; font-weight: 700; color: var(--charcoal); line-height: 1; }
     .price-block__compare { font-size: 0.875rem; color: var(--muted); }
@@ -119,7 +119,7 @@
       display: flex; gap: 8px; align-items: flex-start;
       font-size: 0.875rem;
     }
-    .feature-item::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; }
+    .feature-item::before { content: '✓'; color: var(--secondary); font-weight: 700; flex-shrink: 0; }
 
     /* Specs table */
     .specs { margin-bottom: 28px; }
@@ -142,13 +142,13 @@
     .compare-section { padding: 80px 0; background: var(--light); }
     .compare-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); }
     .compare-table th {
-      background: var(--charcoal); color: var(--white);
+      background: var(--primary); color: var(--primary-on);
       padding: 16px 20px; text-align: left;
       font-family: var(--font-serif); font-size: 1rem;
       font-weight: 600;
     }
-    .compare-table th:first-child { background: var(--deep); color: rgba(255,255,255,0.6); font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
-    .compare-table th.featured { background: var(--gold); }
+    .compare-table th:first-child { background: var(--inverse-surface); color: rgba(255,255,255,0.6); font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+    .compare-table th.featured { background: var(--secondary); }
     .compare-table td { padding: 14px 20px; font-size: 0.875rem; border-bottom: 1px solid var(--border); }
     .compare-table td:first-child { color: var(--muted); font-weight: 500; }
     .compare-table tr:last-child td { border-bottom: none; }
@@ -184,9 +184,9 @@
     }
     .modal__title { font-family: var(--font-serif); font-size: 1.6rem; margin-bottom: 6px; }
     .modal__sub { font-size: 0.9rem; color: var(--muted); margin-bottom: 24px; }
-    .modal__price-tag { background: var(--gold-pale); border-radius: var(--radius); padding: 14px 18px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; }
+    .modal__price-tag { background: var(--secondary-fixed-dim); border-radius: var(--radius); padding: 14px 18px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; }
     .modal__price-tag span:first-child { font-size: 0.85rem; color: var(--muted); }
-    .modal__price-tag span:last-child { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; color: var(--gold); }
+    .modal__price-tag span:last-child { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; color: var(--secondary); }
     .form-group { margin-bottom: 16px; }
     .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--mid); margin-bottom: 6px; letter-spacing: 0.04em; text-transform: uppercase; }
     .form-group input, .form-group textarea, .form-group select {
@@ -198,7 +198,7 @@
       background: var(--white);
     }
     .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-      outline: none; border-color: var(--gold);
+      outline: none; border-color: var(--secondary);
     }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .form-note { font-size: 0.8rem; color: var(--muted); margin-top: 10px; line-height: 1.5; }
@@ -211,7 +211,7 @@
     .animate.visible { opacity: 1; transform: translateY(0); }
 
     /* Mobile nav */
-    .nav__mobile { background: var(--charcoal); max-height: 0; overflow: hidden; transition: max-height 0.3s ease; border-top: 1px solid rgba(255,255,255,0.06); }
+    .nav__mobile { background: var(--primary); max-height: 0; overflow: hidden; transition: max-height 0.3s ease; border-top: 1px solid rgba(255,255,255,0.06); }
     .nav__mobile.open { max-height: 400px; }
     .nav__mobile ul { padding: 16px 24px; display: flex; flex-direction: column; gap: 4px; }
     .nav__mobile a { display: block; padding: 10px 0; font-size: 0.9rem; color: rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.06); }
@@ -233,7 +233,7 @@
   </div>
   <nav class="nav">
     <div class="nav__inner">
-      <a href="index.html" class="nav__logo">Pass<span>age</span></a>
+      <a href="index.html" class="nav__logo">PASS<span>AGE</span></a>
       <ul class="nav__links">
         <li><a href="index.html">Home</a></li>
         <li><a href="products.html" class="active">Our Caskets</a></li>
@@ -565,7 +565,7 @@
     <div class="container">
       <div class="footer__grid">
         <div>
-          <p class="footer__brand">Pass<span>age</span></p>
+          <p class="footer__brand">PASS<span>AGE</span></p>
           <p class="footer__tagline">"Because grief is burden enough."</p>
           <p style="font-size:0.8rem; line-height:1.7;">Assembled in Singapore. Sustainably sourced. A social enterprise — 30% of net profits donated to charity. Free caskets for the needy.</p>
         </div>
