@@ -281,13 +281,13 @@
     <div class="container">
       <div class="product-layout animate">
         <div class="product-visual">
-          <div class="product-visual__main" style="background:#f0ece6; padding:0; overflow:hidden;">
-            <img src="images/casket-pine.jpg" alt="Serene casket — FSC pine with natural linen lining" style="width:100%;height:100%;object-fit:cover;" />
+          <div class="product-visual__main" id="visual-serene" style="background:#f0ece6; padding:0; overflow:hidden;">
+            <img src="images/casket-pine.jpg" alt="Serene casket" style="width:100%;height:100%;object-fit:cover;" />
           </div>
           <div class="product-thumbs">
-            <div class="product-thumb active" style="overflow:hidden; padding:0;"><img src="images/casket-pine.jpg" alt="" style="width:100%;height:100%;object-fit:cover;" /></div>
-            <div class="product-thumb" style="background:var(--light); font-size:1.4rem; display:flex; align-items:center; justify-content:center;">📐</div>
-            <div class="product-thumb" style="background:var(--light); font-size:1.4rem; display:flex; align-items:center; justify-content:center;">🌿</div>
+            <div class="product-thumb active" id="thumb-serene-0" onclick="switchView('serene',0)" style="overflow:hidden; padding:0;"><img src="images/casket-pine.jpg" alt="" style="width:100%;height:100%;object-fit:cover;" /></div>
+            <div class="product-thumb" id="thumb-serene-1" onclick="switchView('serene',1)" style="background:var(--light); font-size:1.4rem; display:flex; align-items:center; justify-content:center;">📐</div>
+            <div class="product-thumb" id="thumb-serene-2" onclick="switchView('serene',2)" style="background:var(--light); font-size:1.4rem; display:flex; align-items:center; justify-content:center;">🌿</div>
           </div>
         </div>
         <div class="product-info">
@@ -343,13 +343,13 @@
     <div class="container">
       <div class="product-layout animate">
         <div class="product-visual">
-          <div class="product-visual__main" style="background:#e8e0d4; padding:0; overflow:hidden;">
-            <img src="images/casket-bamboo.jpg" alt="Tranquil casket — premium hardwood with ivory velvet lining" style="width:100%;height:100%;object-fit:cover;" />
+          <div class="product-visual__main" id="visual-tranquil" style="background:#e8e0d4; padding:0; overflow:hidden;">
+            <img src="images/casket-bamboo.jpg" alt="Tranquil casket" style="width:100%;height:100%;object-fit:cover;" />
           </div>
           <div class="product-thumbs">
-            <div class="product-thumb active" style="overflow:hidden; padding:0;"><img src="images/casket-bamboo.jpg" alt="" style="width:100%;height:100%;object-fit:cover;" /></div>
-            <div class="product-thumb" style="background:var(--light); font-size:1.4rem; display:flex; align-items:center; justify-content:center;">📐</div>
-            <div class="product-thumb" style="background:var(--light); font-size:1.4rem; display:flex; align-items:center; justify-content:center;">✨</div>
+            <div class="product-thumb active" id="thumb-tranquil-0" onclick="switchView('tranquil',0)" style="overflow:hidden; padding:0;"><img src="images/casket-bamboo.jpg" alt="" style="width:100%;height:100%;object-fit:cover;" /></div>
+            <div class="product-thumb" id="thumb-tranquil-1" onclick="switchView('tranquil',1)" style="background:var(--light); font-size:1.4rem; display:flex; align-items:center; justify-content:center;">📐</div>
+            <div class="product-thumb" id="thumb-tranquil-2" onclick="switchView('tranquil',2)" style="background:var(--light); font-size:1.4rem; display:flex; align-items:center; justify-content:center;">🌿</div>
           </div>
         </div>
         <div class="product-info">
@@ -408,13 +408,13 @@
     <div class="container">
       <div class="product-layout animate">
         <div class="product-visual">
-          <div class="product-visual__main dark" style="padding:0; overflow:hidden;">
-            <img src="images/casket-teak.jpg" alt="Eternal casket — solid mahogany with burgundy silk lining" style="width:100%;height:100%;object-fit:cover;" />
+          <div class="product-visual__main dark" id="visual-eternal" style="padding:0; overflow:hidden;">
+            <img src="images/casket-teak.jpg" alt="Eternal casket" style="width:100%;height:100%;object-fit:cover;" />
           </div>
           <div class="product-thumbs">
-            <div class="product-thumb active" style="overflow:hidden; padding:0;"><img src="images/casket-teak.jpg" alt="" style="width:100%;height:100%;object-fit:cover;" /></div>
-            <div class="product-thumb" style="background:var(--light); font-size:1.4rem; display:flex; align-items:center; justify-content:center;">📐</div>
-            <div class="product-thumb" style="background:var(--light); font-size:1.4rem; display:flex; align-items:center; justify-content:center;">✨</div>
+            <div class="product-thumb active" id="thumb-eternal-0" onclick="switchView('eternal',0)" style="overflow:hidden; padding:0;"><img src="images/casket-teak.jpg" alt="" style="width:100%;height:100%;object-fit:cover;" /></div>
+            <div class="product-thumb" id="thumb-eternal-1" onclick="switchView('eternal',1)" style="background:var(--light); font-size:1.4rem; display:flex; align-items:center; justify-content:center;">📐</div>
+            <div class="product-thumb" id="thumb-eternal-2" onclick="switchView('eternal',2)" style="background:var(--light); font-size:1.4rem; display:flex; align-items:center; justify-content:center;">🌿</div>
           </div>
         </div>
         <div class="product-info">
@@ -722,6 +722,120 @@
       }, 1000);
 
       return false;
+    }
+
+    // ── Product visual switcher ──
+    const PRODUCT_DATA = {
+      serene:   { L:210, W:66, H:58,  name:'Serene',   material:'FSC-Certified Pine',
+                  img:'images/casket-pine.jpg',
+                  faceF:'#cfc5b0', faceT:'#dfd5be', faceS:'#b0a488',
+                  mats:[{l:'FSC Pine timber',pct:82,c:'#596060'},{l:'White satin lining',pct:10,c:'#9aada6'},{l:'Natural lacquer',pct:5,c:'#725b3f'},{l:'Hardwood hardware',pct:3,c:'#a09070'}] },
+      tranquil: { L:210, W:66, H:60,  name:'Tranquil', material:'FSC-Certified Hardwood',
+                  img:'images/casket-bamboo.jpg',
+                  faceF:'#c0a880', faceT:'#d0b890', faceS:'#a09060',
+                  mats:[{l:'FSC Hardwood',pct:80,c:'#596060'},{l:'Ivory velvet lining',pct:12,c:'#c4b49a'},{l:'Satin finish',pct:5,c:'#725b3f'},{l:'Nickel hardware',pct:3,c:'#8090a0'}] },
+      eternal:  { L:210, W:68, H:62,  name:'Eternal',  material:'FSC-Certified Mahogany',
+                  img:'images/casket-teak.jpg',
+                  faceF:'#7a5030', faceT:'#9a6840', faceS:'#5a3820',
+                  mats:[{l:'FSC Mahogany',pct:83,c:'#596060'},{l:'Burgundy silk lining',pct:10,c:'#8b2040'},{l:'Hand-polish finish',pct:4,c:'#725b3f'},{l:'Brass hardware',pct:3,c:'#c09030'}] }
+    };
+
+    function arcPath(cx,cy,r,a0,a1) {
+      const rad = d => (d-90)*Math.PI/180;
+      const x0=cx+r*Math.cos(rad(a0)), y0=cy+r*Math.sin(rad(a0));
+      const x1=cx+r*Math.cos(rad(a1)), y1=cy+r*Math.sin(rad(a1));
+      return `M${cx},${cy} L${x0},${y0} A${r},${r} 0 ${a1-a0>180?1:0},1 ${x1},${y1}Z`;
+    }
+
+    function dimSVG(d) {
+      const scale = 230 / d.L;
+      const lp = d.L*scale, hp = d.H*scale, dp = d.W*0.32; // cabinet depth
+      const ox=48, oy=230; // front-bottom-left
+      // 3 faces
+      const A=[ox,oy], B=[ox+lp,oy], C=[ox+lp,oy-hp], Dt=[ox,oy-hp];
+      const Br=[ox+lp+dp,oy-dp], Cr=[ox+lp+dp,oy-hp-dp];
+      const Tr=[ox+dp,oy-hp-dp], Tl=[ox,oy-hp];
+      const f=(...pts)=>pts.map(p=>p.join(',')).join(' ');
+      const arrow=(x1,y1,x2,y2,lbl,mx,my,vert=false)=>{
+        const dx=x2-x1,dy=y2-y1,len=Math.sqrt(dx*dx+dy*dy);
+        const ux=dx/len,uy=dy/len;
+        const hs=5;
+        const ah1=`${x1+uy*hs},${y1-ux*hs} ${x1-uy*hs},${y1+ux*hs} ${x1+ux*hs*1.5},${y1+uy*hs*1.5}`;
+        const ah2=`${x2+uy*hs},${y2-ux*hs} ${x2-uy*hs},${y2+ux*hs} ${x2-ux*hs*1.5},${y2-uy*hs*1.5}`;
+        const tr=vert?`transform="rotate(-90,${mx},${my})"`:'' ;
+        return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#596060" stroke-width="1.2"/>
+          <polygon points="${ah1}" fill="#596060"/><polygon points="${ah2}" fill="#596060"/>
+          <text x="${mx}" y="${my}" font-size="11" fill="#32332d" text-anchor="middle" font-family="sans-serif" ${tr}>${lbl}</text>`;
+      };
+      return `<svg viewBox="0 0 360 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="background:#f7f5f0">
+        <polygon points="${f(A,B,C,Dt)}" fill="${d.faceF}" stroke="#8a7a60" stroke-width="1"/>
+        <polygon points="${f(B,Br,Cr,C)}" fill="${d.faceS}" stroke="#8a7a60" stroke-width="1"/>
+        <polygon points="${f(Dt,C,Cr,Tr)}" fill="${d.faceT}" stroke="#8a7a60" stroke-width="1"/>
+        <!-- dim: length -->
+        <line x1="${ox}" y1="${oy+14}" x2="${ox+lp}" y2="${oy+14}" stroke="#ccc" stroke-width="0.8" stroke-dasharray="2,2"/>
+        ${arrow(ox,oy+22,ox+lp,oy+22,`${d.L} cm`,(ox+ox+lp)/2,oy+35)}
+        <!-- dim: height -->
+        <line x1="${ox-14}" y1="${oy}" x2="${ox-14}" y2="${oy-hp}" stroke="#ccc" stroke-width="0.8" stroke-dasharray="2,2"/>
+        ${arrow(ox-22,oy,ox-22,oy-hp,`${d.H} cm`,ox-36,(oy+oy-hp)/2,true)}
+        <!-- dim: width -->
+        <line x1="${ox+lp}" y1="${oy}" x2="${ox+lp+dp}" y2="${oy-dp}" stroke="#ccc" stroke-width="0.8" stroke-dasharray="2,2"/>
+        <line x1="${ox+lp+dp+8}" y1="${oy-dp-8}" x2="${ox+lp+dp}" y2="${oy-dp}" stroke="#596060" stroke-width="1.2"/>
+        <text x="${ox+lp+dp+12}" y="${oy-dp-10}" font-size="11" fill="#32332d" font-family="sans-serif">${d.W} cm</text>
+        <text x="${ox+lp/2}" y="22" font-size="11" fill="#725b3f" text-anchor="middle" font-family="sans-serif" font-weight="700" letter-spacing="1">${d.material.toUpperCase()}</text>
+        <text x="${ox+lp/2}" y="38" font-size="10" fill="#7b7b74" text-anchor="middle" font-family="sans-serif">L × W × H (cm)</text>
+      </svg>`;
+    }
+
+    function materialSVG(d) {
+      const cx=130,cy=145,r=95;
+      let a=-90, paths='', legend='';
+      d.mats.forEach((m,i)=>{
+        const sweep=m.pct*3.6;
+        paths+=`<path d="${arcPath(cx,cy,r,a,a+sweep)}" fill="${m.c}" stroke="#f7f5f0" stroke-width="2"/>`;
+        // label inside slice
+        const midA=a+sweep/2, midR=rad=>(rad-90)*Math.PI/180;
+        const tx=cx+(r*0.65)*Math.cos(midR(a+sweep/2)), ty=cy+(r*0.65)*Math.sin(midR(a+sweep/2));
+        if(m.pct>=8) paths+=`<text x="${tx}" y="${ty}" text-anchor="middle" dominant-baseline="middle" font-size="11" font-weight="700" fill="#fff" font-family="sans-serif">${m.pct}%</text>`;
+        const ly=70+i*46;
+        legend+=`<rect x="262" y="${ly}" width="13" height="13" rx="2" fill="${m.c}"/>`;
+        legend+=`<text x="281" y="${ly+10}" font-size="11" fill="#32332d" font-family="sans-serif">${m.l}</text>`;
+        legend+=`<text x="281" y="${ly+23}" font-size="11" fill="#596060" font-family="sans-serif" font-weight="700">${m.pct}%</text>`;
+        a+=sweep;
+      });
+      return `<svg viewBox="0 0 360 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="background:#f7f5f0">
+        <text x="${cx}" y="28" font-size="11" fill="#725b3f" text-anchor="middle" font-family="sans-serif" font-weight="700" letter-spacing="1">MATERIAL COMPOSITION</text>
+        <text x="${cx}" y="44" font-size="10" fill="#7b7b74" text-anchor="middle" font-family="sans-serif">${d.material}</text>
+        ${paths}
+        <circle cx="${cx}" cy="${cy}" r="38" fill="#f7f5f0"/>
+        <text x="${cx}" y="${cy-4}" text-anchor="middle" font-size="10" fill="#596060" font-family="sans-serif">FSC</text>
+        <text x="${cx}" y="${cy+10}" text-anchor="middle" font-size="10" fill="#596060" font-family="sans-serif" font-weight="700">Certified</text>
+        ${legend}
+      </svg>`;
+    }
+
+    function switchView(product, view) {
+      const d = PRODUCT_DATA[product];
+      const visual = document.getElementById('visual-'+product);
+      // update thumb active states
+      [0,1,2].forEach(i => {
+        document.getElementById(`thumb-${product}-${i}`).classList.toggle('active', i===view);
+      });
+      if (view===0) {
+        visual.style.background = view===0 ? '' : '#f7f5f0';
+        visual.style.padding = '0';
+        visual.style.overflow = 'hidden';
+        visual.innerHTML = `<img src="${d.img}" style="width:100%;height:100%;object-fit:cover;">`;
+      } else if (view===1) {
+        visual.style.background = '#f7f5f0';
+        visual.style.padding = '0';
+        visual.style.overflow = 'visible';
+        visual.innerHTML = dimSVG(d);
+      } else {
+        visual.style.background = '#f7f5f0';
+        visual.style.padding = '0';
+        visual.style.overflow = 'visible';
+        visual.innerHTML = materialSVG(d);
+      }
     }
 
     function goBackToStep1() {
