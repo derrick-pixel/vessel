@@ -520,11 +520,11 @@
           <input type="hidden" id="co-input-model" name="model" />
           <div class="form-row">
             <div class="form-group"><label>First Name</label><input type="text" required placeholder="Wei Ming" /></div>
-            <div class="form-group"><label>Last Name</label><input type="text" required placeholder="Tan" /></div>
+            <div class="form-group"><label>Last Name</label><input id="co-lastname" type="text" required placeholder="Tan" /></div>
           </div>
           <div class="form-group"><label>Mobile Number</label><input type="tel" required placeholder="+65 9XXX XXXX" /></div>
           <div class="form-group"><label>Email Address</label><input type="email" required placeholder="you@email.com" /></div>
-          <div class="form-group"><label>Delivery Address</label><input type="text" required placeholder="Block / Street / Unit, Singapore XXXXXX" /></div>
+          <div class="form-group"><label>Delivery Address</label><input id="co-address" type="text" required placeholder="Block / Street / Unit, Singapore XXXXXX" /></div>
           <div class="form-group">
             <label>Required Delivery Time</label>
             <select id="co-delivery" required onchange="updateDeliverySurcharge()">
@@ -652,7 +652,7 @@
       return crc;
     }
 
-    function buildPayNowQR(amount) {
+    function buildPayNowQR(amount, reference) {
       const proxyValue = '+6598479776';
       const merchantName = 'PASSAGE';
 
@@ -661,6 +661,9 @@
                 + emvField('01', '0')              // proxy type: mobile
                 + emvField('02', proxyValue)
                 + emvField('03', '0');             // amount not editable
+
+      // Additional data field (ID 62) — bill number as payment reference
+      const adf = emvField('01', reference.slice(0, 25));
 
       let qr = emvField('00', '01')               // payload format
               + emvField('01', '11')               // static QR
@@ -671,7 +674,8 @@
               + emvField('58', 'SG')               // country
               + emvField('59', merchantName)        // merchant name
               + emvField('60', 'Singapore')         // city
-              + '6304';                             // CRC tag (no length yet)
+              + emvField('62', adf)                // additional data (reference)
+              + '6304';                             // CRC tag
 
       const checksum = crc16ccitt(qr).toString(16).toUpperCase().padStart(4, '0');
       return qr + checksum;
@@ -689,11 +693,18 @@
         const priceText = document.getElementById('co-price').textContent;
         const amount = parseFloat(priceText.replace(/[^0-9.]/g, ''));
 
+        // Build reference: LASTNAME + postal code extracted from address
+        const lastName = (document.getElementById('co-lastname').value || '').trim().toUpperCase();
+        const address = document.getElementById('co-address').value || '';
+        const postalMatch = address.match(/\d{6}/);
+        const postal = postalMatch ? postalMatch[0] : '';
+        const reference = (lastName + ' ' + postal).trim();
+
         // Generate QR
         const qrContainer = document.getElementById('paynow-qr');
         qrContainer.innerHTML = '';
         new QRCode(qrContainer, {
-          text: buildPayNowQR(amount),
+          text: buildPayNowQR(amount, reference),
           width: 200,
           height: 200,
           colorDark: '#32332d',
