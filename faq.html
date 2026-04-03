@@ -120,8 +120,50 @@
     .nav__mobile a { display: block; padding: 10px 0; font-size: 0.9rem; color: rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.06); }
     .nav__mobile .btn { margin: 8px 24px 16px; display: block; text-align: center; }
 
+    /* Timeline */
+    .timeline { position: relative; padding-left: 36px; }
+    .timeline::before { content: ''; position: absolute; left: 10px; top: 0; bottom: 0; width: 2px; background: var(--border); }
+    .timeline-step { position: relative; margin-bottom: 28px; }
+    .timeline-step__dot { position: absolute; left: -30px; top: 4px; width: 18px; height: 18px; border-radius: 50%; background: var(--secondary); border: 3px solid var(--white); box-shadow: 0 0 0 2px var(--gold); }
+    .timeline-step__num { font-size: 0.7rem; font-weight: 700; color: var(--secondary); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+    .timeline-step h4 { font-size: 0.95rem; margin-bottom: 6px; }
+    .timeline-step p { font-size: 0.875rem; line-height: 1.7; }
+
+    /* Know cards */
+    .know-cards { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; margin-bottom: 48px; }
+    .know-card { border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; background: var(--surface-0); }
+    .know-card__icon { font-size: 1.6rem; margin-bottom: 12px; }
+    .know-card h4 { font-size: 0.95rem; margin-bottom: 8px; }
+    .know-card p, .know-card li { font-size: 0.85rem; line-height: 1.7; color: var(--mid); }
+    .know-card ul { padding-left: 16px; margin-top: 6px; }
+    .know-card ul li { list-style: disc; margin-bottom: 4px; }
+
+    /* Callout */
+    .callout { border-left: 3px solid var(--gold); background: var(--secondary-fixed-dim); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; padding: 18px 24px; margin: 24px 0; font-size: 0.9rem; line-height: 1.7; color: var(--charcoal); }
+    .callout strong { color: var(--secondary); }
+
+    /* Section divider */
+    .guide-divider { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+
+    /* Gov links */
+    .govlink-group { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .govlink { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 600; color: var(--secondary); background: var(--secondary-fixed-dim); padding: 6px 12px; border-radius: 20px; transition: var(--transition); text-decoration: none; }
+    .govlink:hover { background: var(--secondary-container); color: var(--secondary-dim); }
+
+    /* Quick reference table */
+    .govref-table { border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--surface-3); }
+    .govref-row { display: grid; grid-template-columns: 1.2fr 2.5fr 1.5fr; gap: 0; padding: 13px 20px; border-bottom: 1px solid var(--surface-2); font-size: 0.875rem; align-items: center; transition: var(--transition); }
+    .govref-row:last-child { border-bottom: none; }
+    .govref-row:hover:not(.govref-header) { background: var(--surface-1); }
+    .govref-header { background: var(--primary); color: var(--primary-on); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .govref-row a { color: var(--secondary); font-weight: 600; }
+    .govref-row a:hover { text-decoration: underline; }
+
     @media (max-width: 640px) {
       .testimonials-grid { grid-template-columns: 1fr; }
+      .know-cards { grid-template-columns: 1fr; }
+      .govref-row { grid-template-columns: 1fr 1fr; }
+      .govref-row span:last-child { grid-column: 1 / -1; }
     }
   </style>
 </head>
@@ -173,6 +215,7 @@
       <button class="tab-btn" onclick="switchTab(2)">What to Say</button>
       <button class="tab-btn" onclick="switchTab(3)">Quality & Delivery</button>
       <button class="tab-btn" onclick="switchTab(4)">Testimonials</button>
+      <button class="tab-btn" onclick="switchTab(5)">General & Civil</button>
     </div>
   </div>
 
@@ -510,6 +553,259 @@
               <p class="testimonial__detail">Jurong West · September 2024 · Purchased: Tranquil</p>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 6: GENERAL & CIVIL -->
+  <div class="tab-panel" id="panel-5">
+    <div class="container">
+      <div class="animate">
+        <p class="section-label">Practical Knowledge</p>
+        <h2>General & Civil — What Every Family Should Know</h2>
+        <div class="divider"></div>
+        <p style="max-width:720px; margin-bottom:48px; font-size:1rem; line-height:1.8;">Regardless of religion, these are the administrative and legal steps every family in Singapore must navigate after a death. Each step below includes the relevant government agency and a direct link to their official resource.</p>
+
+        <!-- STEP-BY-STEP TIMELINE -->
+        <h3 style="margin-bottom:24px;">Step-by-Step: Immediate & Short-Term Actions</h3>
+        <div class="timeline">
+
+          <div class="timeline-step">
+            <div class="timeline-step__dot"></div>
+            <p class="timeline-step__num">Within hours</p>
+            <h4>Report the Death & Obtain the Death Certificate</h4>
+            <p>If death occurs at home, call the police immediately at <strong>999</strong>. Police will coordinate with a doctor to certify the death. A certified doctor must sign the Death Certificate before any funeral arrangements can proceed.</p>
+            <p style="margin-top:8px;">For <strong>sudden, unnatural, or unexplained deaths</strong>, the Coroner's Court will be involved — this may delay arrangements by 24–48 hours. The Coroner's process is handled by the State Courts.</p>
+            <div class="govlink-group">
+              <a href="https://www.spf.gov.sg" target="_blank" rel="noopener" class="govlink">🔗 Singapore Police Force — spf.gov.sg</a>
+              <a href="https://www.judiciary.gov.sg/civil/coroner-s-court" target="_blank" rel="noopener" class="govlink">🔗 State Courts — Coroner's Court</a>
+              <a href="https://www.moh.gov.sg" target="_blank" rel="noopener" class="govlink">🔗 Ministry of Health — moh.gov.sg</a>
+            </div>
+          </div>
+
+          <div class="timeline-step">
+            <div class="timeline-step__dot"></div>
+            <p class="timeline-step__num">Within 24 hours</p>
+            <h4>Register the Death with ICA</h4>
+            <p>All deaths in Singapore must be registered with the <strong>Immigration & Checkpoints Authority (ICA)</strong> within 24 hours of the Death Certificate being issued. Registration can be done at ICA Building or at selected hospitals. You will need the deceased's NRIC and the signed Death Certificate.</p>
+            <p style="margin-top:8px;">ICA will issue the <strong>Certificate of Registration of Death (CORD)</strong>, which is required for all subsequent administrative steps.</p>
+            <div class="govlink-group">
+              <a href="https://www.ica.gov.sg/public-education/deaths" target="_blank" rel="noopener" class="govlink">🔗 ICA — Registering a Death</a>
+              <a href="https://www.ica.gov.sg/about-us/visit-ica" target="_blank" rel="noopener" class="govlink">🔗 ICA — Locations & Opening Hours</a>
+            </div>
+          </div>
+
+          <div class="timeline-step">
+            <div class="timeline-step__dot"></div>
+            <p class="timeline-step__num">Day 1–2</p>
+            <h4>Apply for Void Deck or Venue Permit</h4>
+            <p>For HDB void deck wakes, the family or funeral director must apply to the relevant <strong>Town Council</strong> for a Funeral Wake Permit. Most Town Councils process this within hours. Permits govern the use of tents, noise levels (generally up to 10pm or midnight), and duration (usually up to 5 days).</p>
+            <p style="margin-top:8px;">You can find your Town Council via the HDB website using your postal code.</p>
+            <div class="govlink-group">
+              <a href="https://www.hdb.gov.sg/community/our-communities/living-in-an-hdb-flat/town-councils" target="_blank" rel="noopener" class="govlink">🔗 HDB — Find Your Town Council</a>
+              <a href="https://www.nea.gov.sg/our-services/pollution-control/noise-pollution/community-noise-management" target="_blank" rel="noopener" class="govlink">🔗 NEA — Community Noise Guidelines</a>
+            </div>
+          </div>
+
+          <div class="timeline-step">
+            <div class="timeline-step__dot"></div>
+            <p class="timeline-step__num">Day 1–2</p>
+            <h4>Engage a Funeral Director</h4>
+            <p>You are free to engage any licensed funeral director. You are <strong>not obligated</strong> to use a specific director, and you may source your own casket separately. Always request an itemised written quote before agreeing to any package.</p>
+            <div class="govlink-group">
+              <a href="https://www.case.org.sg" target="_blank" rel="noopener" class="govlink">🔗 CASE — Consumer Rights & Complaints</a>
+              <a href="faq.html" class="govlink">🔗 Passage FAQ — Know Your Rights</a>
+            </div>
+          </div>
+
+          <div class="timeline-step">
+            <div class="timeline-step__dot"></div>
+            <p class="timeline-step__num">Within 1 week</p>
+            <h4>Arrange Burial or Cremation</h4>
+            <p>In Singapore, cremation is the more common option due to land constraints. All burials and cremations are regulated by the National Environment Agency (NEA). The NEA manages Choa Chu Kang Cemetery (for burial) and several crematoria island-wide.</p>
+            <div class="govlink-group">
+              <a href="https://www.nea.gov.sg/our-services/public-cleanliness/cemeteries-and-crematoria" target="_blank" rel="noopener" class="govlink">🔗 NEA — Cemeteries & Crematoria</a>
+              <a href="https://www.nea.gov.sg/our-services/public-cleanliness/cemeteries-and-crematoria/cremation-booking" target="_blank" rel="noopener" class="govlink">🔗 NEA — Cremation Booking</a>
+            </div>
+          </div>
+
+          <div class="timeline-step">
+            <div class="timeline-step__dot"></div>
+            <p class="timeline-step__num">Within 1 month</p>
+            <h4>Claim CPF Savings</h4>
+            <p>If the deceased made a <strong>CPF nomination</strong>, the nominated beneficiaries can file a claim directly with the CPF Board. CPF savings do not form part of the estate and are distributed separately from the will. If no nomination was made, CPF savings are transferred to the Public Trustee for distribution.</p>
+            <div class="govlink-group">
+              <a href="https://www.cpf.gov.sg/member/account-services/providing-for-your-loved-ones/withdrawing-cpf-savings-for-next-of-kin" target="_blank" rel="noopener" class="govlink">🔗 CPF Board — Withdrawing CPF for Next-of-Kin</a>
+              <a href="https://www.mof.gov.sg/policies/public-trustee" target="_blank" rel="noopener" class="govlink">🔗 Public Trustee's Office (no CPF nomination)</a>
+            </div>
+          </div>
+
+          <div class="timeline-step">
+            <div class="timeline-step__dot"></div>
+            <p class="timeline-step__num">Within 1–3 months</p>
+            <h4>Administer the Estate (Will or Intestacy)</h4>
+            <p>If the deceased left a <strong>valid will</strong>, the executor named in the will applies to the State Courts for a Grant of Probate. If there is <strong>no will</strong>, a next-of-kin applies for Letters of Administration. The estate is then distributed under the <strong>Intestate Succession Act</strong> (non-Muslims) or <strong>Faraid</strong> (Muslims via MUIS).</p>
+            <p style="margin-top:8px;">For smaller estates (below S$50,000 with no immovable property), the Public Trustee may be able to administer without going to court.</p>
+            <div class="govlink-group">
+              <a href="https://www.judiciary.gov.sg/civil/probate-and-administration" target="_blank" rel="noopener" class="govlink">🔗 State Courts — Probate & Administration</a>
+              <a href="https://sso.agc.gov.sg/Act/ISA1967" target="_blank" rel="noopener" class="govlink">🔗 Intestate Succession Act — Singapore Statutes</a>
+              <a href="https://www.muis.gov.sg/Faraid" target="_blank" rel="noopener" class="govlink">🔗 MUIS — Faraid (Muslim Inheritance)</a>
+              <a href="https://www.mof.gov.sg/policies/public-trustee/estate-administration" target="_blank" rel="noopener" class="govlink">🔗 Public Trustee — Small Estates</a>
+              <a href="https://www.cjc.org.sg" target="_blank" rel="noopener" class="govlink">🔗 Community Justice Centre — Free Legal Guidance</a>
+            </div>
+          </div>
+
+          <div class="timeline-step">
+            <div class="timeline-step__dot"></div>
+            <p class="timeline-step__num">Ongoing</p>
+            <h4>Notify Relevant Agencies & Cancel Services</h4>
+            <p>After the funeral, notify and close accounts with various agencies. Many can be done via <strong>Singpass / MyInfo</strong> through a single digital notification service.</p>
+            <div class="govlink-group">
+              <a href="https://www.singpass.gov.sg" target="_blank" rel="noopener" class="govlink">🔗 Singpass — Digital Identity & Services</a>
+              <a href="https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/what-is-taxable-what-is-not/income-received-by-a-deceased-person" target="_blank" rel="noopener" class="govlink">🔗 IRAS — Tax Obligations of Deceased Person</a>
+              <a href="https://www.hdb.gov.sg/residential/living-in-an-hdb-flat/changing-owners-occupiers/transfer-of-ownership" target="_blank" rel="noopener" class="govlink">🔗 HDB — Transfer of Flat Ownership</a>
+              <a href="https://www.lta.gov.sg/content/ltagov/en/licensing_permits/vehicles/deregistering_your_vehicle.html" target="_blank" rel="noopener" class="govlink">🔗 LTA — Deregister Deceased's Vehicle</a>
+            </div>
+          </div>
+
+        </div>
+
+        <hr class="guide-divider" />
+
+        <!-- COLUMBARIUM & MEMORIALISATION -->
+        <h3 style="margin-bottom:20px;">Ash Interment & Columbarium Options</h3>
+        <div class="know-cards" style="margin-bottom:40px;">
+          <div class="know-card">
+            <div class="know-card__icon">🏛️</div>
+            <h4>Mandai Columbarium</h4>
+            <p>Singapore's largest public columbarium, managed by NParks. Located in Mandai. Applications for niches can be made online. Waiting times vary; apply early.</p>
+            <ul><li><a href="https://www.nparks.gov.sg/gardens-parks-and-nature/parks-and-nature-reserves/mandai-columbarium" target="_blank" rel="noopener" style="color:var(--secondary);">NParks — Mandai Columbarium ↗</a></li></ul>
+          </div>
+          <div class="know-card">
+            <div class="know-card__icon">⛪</div>
+            <h4>Religious & Private Columbaria</h4>
+            <p>Many temples, churches, and private operators maintain their own columbaria. Eligibility criteria and fees vary. Contact your place of worship directly for availability.</p>
+            <ul><li><a href="https://www.nea.gov.sg/our-services/public-cleanliness/cemeteries-and-crematoria/list-of-columbaria" target="_blank" rel="noopener" style="color:var(--secondary);">NEA — Licensed Columbaria in Singapore ↗</a></li></ul>
+          </div>
+          <div class="know-card">
+            <div class="know-card__icon">🌊</div>
+            <h4>Sea Burial (Ash Scattering)</h4>
+            <p>Scattering of ashes at sea is permitted in Singapore in designated areas. The family charters a boat; NEA regulates the process. No permit is required but guidelines must be followed.</p>
+            <ul><li><a href="https://www.nea.gov.sg/our-services/public-cleanliness/cemeteries-and-crematoria/sea-burial" target="_blank" rel="noopener" style="color:var(--secondary);">NEA — Sea Burial Guidelines ↗</a></li></ul>
+          </div>
+          <div class="know-card">
+            <div class="know-card__icon">🪦</div>
+            <h4>Burial at Choa Chu Kang Cemetery</h4>
+            <p>Singapore's main public cemetery accepts burials, though land is limited and time-limited leases apply. Exhumation after the lease period is required unless renewed. The NEA manages bookings.</p>
+            <ul><li><a href="https://www.nea.gov.sg/our-services/public-cleanliness/cemeteries-and-crematoria/burial-booking" target="_blank" rel="noopener" style="color:var(--secondary);">NEA — Burial Booking ↗</a></li></ul>
+          </div>
+        </div>
+
+        <hr class="guide-divider" />
+
+        <!-- ADVANCE PLANNING -->
+        <h3 style="margin-bottom:20px;">Planning Ahead — For Yourself or a Loved One</h3>
+        <p style="margin-bottom:24px; max-width:720px;">These are tools Singaporeans can use to plan ahead and reduce the burden on family members when the time comes.</p>
+        <div class="know-cards" style="margin-bottom:40px;">
+          <div class="know-card">
+            <div class="know-card__icon">📜</div>
+            <h4>Will Writing</h4>
+            <p>A legally valid will ensures your estate is distributed as you wish and spares your family from costly intestacy proceedings. Wills do not need to be registered in Singapore but the Wills Registry at the Singapore Academy of Law offers optional deposit.</p>
+            <ul>
+              <li><a href="https://www.sal.org.sg/services/wills-registry" target="_blank" rel="noopener" style="color:var(--secondary);">SAL — Wills Registry ↗</a></li>
+              <li><a href="https://www.lab.mlaw.gov.sg" target="_blank" rel="noopener" style="color:var(--secondary);">Legal Aid Bureau — Free Legal Assistance ↗</a></li>
+            </ul>
+          </div>
+          <div class="know-card">
+            <div class="know-card__icon">🔑</div>
+            <h4>Lasting Power of Attorney (LPA)</h4>
+            <p>An LPA allows you to appoint a trusted person to make decisions on your behalf if you lose mental capacity. Every adult Singaporean is encouraged to have one. Registration is done via the Office of the Public Guardian.</p>
+            <ul><li><a href="https://www.opg.gov.sg/lasting-power-of-attorney/what-is-lpa/" target="_blank" rel="noopener" style="color:var(--secondary);">OPG — What is an LPA? ↗</a></li></ul>
+          </div>
+          <div class="know-card">
+            <div class="know-card__icon">🏥</div>
+            <h4>Advance Medical Directive (AMD)</h4>
+            <p>An AMD is a legal document instructing doctors not to use extraordinary life-sustaining treatment if you are terminally ill and unconscious. It must be witnessed by a doctor. Registration is held by the Ministry of Health.</p>
+            <ul><li><a href="https://www.moh.gov.sg/policies-and-legislation/advance-medical-directive" target="_blank" rel="noopener" style="color:var(--secondary);">MOH — Advance Medical Directive ↗</a></li></ul>
+          </div>
+          <div class="know-card">
+            <div class="know-card__icon">🌐</div>
+            <h4>MyLegacy — One-Stop Planning Portal</h4>
+            <p>MyLegacy.gov.sg is Singapore's government portal for end-of-life planning. It covers wills, LPA, AMD, CPF nominations, funeral preferences, and advance care planning in one place.</p>
+            <ul><li><a href="https://mylegacy.life.gov.sg" target="_blank" rel="noopener" style="color:var(--secondary);">MyLegacy — mylegacy.life.gov.sg ↗</a></li></ul>
+          </div>
+          <div class="know-card">
+            <div class="know-card__icon">💛</div>
+            <h4>Advance Care Planning (ACP)</h4>
+            <p>ACP is a guided conversation to document your wishes for future healthcare. Facilitated by the Agency for Integrated Care (AIC), it helps family and doctors understand your preferences if you cannot speak for yourself.</p>
+            <ul><li><a href="https://www.aic.sg/care-services/advance-care-planning" target="_blank" rel="noopener" style="color:var(--secondary);">AIC — Advance Care Planning ↗</a></li></ul>
+          </div>
+          <div class="know-card">
+            <div class="know-card__icon">💰</div>
+            <h4>CPF Nomination</h4>
+            <p>Without a CPF nomination, your CPF savings go to the Public Trustee — a slow and costly process. Making a nomination takes minutes via the CPF app or website and ensures your savings go directly to the people you choose.</p>
+            <ul><li><a href="https://www.cpf.gov.sg/member/account-services/providing-for-your-loved-ones/making-a-cpf-nomination" target="_blank" rel="noopener" style="color:var(--secondary);">CPF Board — Make a Nomination ↗</a></li></ul>
+          </div>
+        </div>
+
+        <hr class="guide-divider" />
+
+        <!-- FINANCIAL ASSISTANCE -->
+        <h3 style="margin-bottom:20px;">Financial Assistance for Funeral Costs</h3>
+        <div class="know-cards" style="margin-bottom:40px;">
+          <div class="know-card">
+            <div class="know-card__icon">🤲</div>
+            <h4>ComCare — MSF</h4>
+            <p>The Ministry of Social and Family Development (MSF) provides financial assistance to low-income families, including help with funeral expenses through the ComCare fund.</p>
+            <ul><li><a href="https://www.msf.gov.sg/our-services/comcare" target="_blank" rel="noopener" style="color:var(--secondary);">MSF — ComCare Assistance ↗</a></li></ul>
+          </div>
+          <div class="know-card">
+            <div class="know-card__icon">🏥</div>
+            <h4>MediFund (Hospital Deaths)</h4>
+            <p>If the deceased passed away in a public hospital with outstanding medical bills, the family may apply for MediFund assistance to cover medical costs.</p>
+            <ul><li><a href="https://www.moh.gov.sg/policies-and-legislation/medifund" target="_blank" rel="noopener" style="color:var(--secondary);">MOH — MediFund ↗</a></li></ul>
+          </div>
+          <div class="know-card">
+            <div class="know-card__icon">🎖️</div>
+            <h4>MINDEF — SAF Personnel</h4>
+            <p>Families of National Servicemen or regular SAF personnel who pass away in service are entitled to specific benefits and funeral grants. Contact MINDEF directly.</p>
+            <ul><li><a href="https://www.mindef.gov.sg/web/portal/mindef/home" target="_blank" rel="noopener" style="color:var(--secondary);">MINDEF — mindef.gov.sg ↗</a></li></ul>
+          </div>
+          <div class="know-card">
+            <div class="know-card__icon">🎗️</div>
+            <h4>Passage — Free Casket Programme</h4>
+            <p>We provide free caskets to needy Singaporeans and those who pass without next-of-kin. Referrals can be made by social workers, hospitals, or directly by the family. No judgment. Full discretion.</p>
+            <ul><li><a href="accreditation.html#free-casket" style="color:var(--secondary);">Passage — Free Casket Programme ↗</a></li></ul>
+          </div>
+        </div>
+
+        <hr class="guide-divider" />
+
+        <!-- QUICK REFERENCE TABLE -->
+        <h3 style="margin-bottom:20px;">Quick Reference — Government Links at a Glance</h3>
+        <div class="govref-table animate">
+          <div class="govref-row govref-header">
+            <span>Agency</span><span>What it handles</span><span>Website</span>
+          </div>
+          <div class="govref-row"><span><strong>ICA</strong></span><span>Death registration, CORD issuance</span><span><a href="https://www.ica.gov.sg" target="_blank" rel="noopener">ica.gov.sg ↗</a></span></div>
+          <div class="govref-row"><span><strong>SPF</strong></span><span>Reporting sudden / home deaths</span><span><a href="https://www.spf.gov.sg" target="_blank" rel="noopener">spf.gov.sg ↗</a></span></div>
+          <div class="govref-row"><span><strong>NEA</strong></span><span>Cremation, burial, columbarium, sea burial</span><span><a href="https://www.nea.gov.sg" target="_blank" rel="noopener">nea.gov.sg ↗</a></span></div>
+          <div class="govref-row"><span><strong>NParks</strong></span><span>Mandai Columbarium niche applications</span><span><a href="https://www.nparks.gov.sg" target="_blank" rel="noopener">nparks.gov.sg ↗</a></span></div>
+          <div class="govref-row"><span><strong>CPF Board</strong></span><span>CPF nomination, withdrawal for next-of-kin</span><span><a href="https://www.cpf.gov.sg" target="_blank" rel="noopener">cpf.gov.sg ↗</a></span></div>
+          <div class="govref-row"><span><strong>State Courts</strong></span><span>Probate, Letters of Administration, Coroner's Court</span><span><a href="https://www.judiciary.gov.sg" target="_blank" rel="noopener">judiciary.gov.sg ↗</a></span></div>
+          <div class="govref-row"><span><strong>Public Trustee</strong></span><span>Small estates, no-nomination CPF distribution</span><span><a href="https://www.mof.gov.sg/policies/public-trustee" target="_blank" rel="noopener">mof.gov.sg ↗</a></span></div>
+          <div class="govref-row"><span><strong>OPG</strong></span><span>Lasting Power of Attorney registration</span><span><a href="https://www.opg.gov.sg" target="_blank" rel="noopener">opg.gov.sg ↗</a></span></div>
+          <div class="govref-row"><span><strong>MOH</strong></span><span>Advance Medical Directive, MediFund</span><span><a href="https://www.moh.gov.sg" target="_blank" rel="noopener">moh.gov.sg ↗</a></span></div>
+          <div class="govref-row"><span><strong>MyLegacy</strong></span><span>One-stop end-of-life planning portal</span><span><a href="https://mylegacy.life.gov.sg" target="_blank" rel="noopener">mylegacy.life.gov.sg ↗</a></span></div>
+          <div class="govref-row"><span><strong>MSF</strong></span><span>ComCare financial assistance</span><span><a href="https://www.msf.gov.sg" target="_blank" rel="noopener">msf.gov.sg ↗</a></span></div>
+          <div class="govref-row"><span><strong>MUIS</strong></span><span>Faraid (Muslim estate distribution)</span><span><a href="https://www.muis.gov.sg" target="_blank" rel="noopener">muis.gov.sg ↗</a></span></div>
+          <div class="govref-row"><span><strong>CASE</strong></span><span>Consumer complaints, funeral director disputes</span><span><a href="https://www.case.org.sg" target="_blank" rel="noopener">case.org.sg ↗</a></span></div>
+          <div class="govref-row"><span><strong>Legal Aid Bureau</strong></span><span>Free legal assistance for eligible applicants</span><span><a href="https://www.lab.mlaw.gov.sg" target="_blank" rel="noopener">lab.mlaw.gov.sg ↗</a></span></div>
+        </div>
+
+        <div class="callout" style="margin-top:40px;">
+          <strong>Passage is here to help.</strong> If you are overwhelmed and don't know where to start, call our 24-hour line at <a href="tel:+6580001234" style="color:var(--secondary); font-weight:600;">+65 8000 1234</a>. We will guide you through the practical steps with no obligation and no pressure.
         </div>
       </div>
     </div>
