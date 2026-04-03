@@ -555,7 +555,10 @@
             📞 &nbsp;Need us sooner? Call <a href="tel:+6598479776" style="color:var(--secondary); font-weight:600;">+65 9847 9776</a>.
           </p>
         </div>
-        <button onclick="closeCheckout()" class="btn btn--outline" style="width:100%; justify-content:center;">Done</button>
+        <div style="display:flex; gap:12px; margin-top:4px;">
+          <button onclick="goBackToStep1()" class="btn btn--outline" style="flex:1; justify-content:center;">← Back</button>
+          <button onclick="closeCheckout()" class="btn btn--outline" style="flex:1; justify-content:center;">Done</button>
+        </div>
       </div>
     </div>
   </div>
@@ -675,6 +678,12 @@
       }, 1000);
 
       return false;
+    }
+
+    function goBackToStep1() {
+      document.getElementById('checkoutSuccess').style.display = 'none';
+      document.getElementById('checkoutForm').style.display = 'block';
+      document.getElementById('paynow-qr').innerHTML = '';
     }
   </script>
 </body>
