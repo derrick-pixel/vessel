@@ -245,6 +245,9 @@
       <button class="religion-tab" onclick="showReligion('christian')">
         <span class="religion-tab__icon">✝️</span> Christian
       </button>
+      <button class="religion-tab" onclick="showReligion('addons')">
+        <span class="religion-tab__icon">🌸</span> Add-Ons & Costs
+      </button>
       <button class="religion-tab" onclick="window.location.href='faq.html#general-civil'">
         <span class="religion-tab__icon">📋</span> General & Civil
       </button>
@@ -700,6 +703,110 @@
     </div>
   </div>
 
+  <!-- ===================== ADD-ONS ===================== -->
+  <div class="religion-panel" id="panel-addons">
+    <div class="container">
+      <div class="animate">
+        <p class="section-label">Funeral Add-Ons</p>
+        <h2>Flowers, Frames & Décor — What to Expect & What It Costs</h2>
+        <div class="divider"></div>
+        <p style="max-width:720px; margin-bottom:48px; font-size:1rem; line-height:1.8;">Beyond the casket, most families arrange additional items for the wake — flower wreaths from well-wishers, a portrait photo frame, table flowers, and ritual items. Prices below reflect typical market rates in Singapore as of 2025. Funeral directors often mark these up; sourcing directly from florists saves significantly.</p>
+
+        <!-- PRICE REFERENCE TABLE -->
+        <h3 style="margin-bottom:20px;">Quick Cost Reference</h3>
+        <div class="govref-table animate" style="margin-bottom:48px;">
+          <div class="govref-row govref-header">
+            <span>Item</span><span>Description</span><span>Est. Cost (SGD)</span>
+          </div>
+          <div class="govref-row"><span><strong>Standing Wreath</strong></span><span>Single-tier condolence stand, ~1m tall</span><span>S$80 – S$150</span></div>
+          <div class="govref-row"><span><strong>Standing Wreath</strong></span><span>Double-tier, more elaborate, ~1.5m</span><span>S$150 – S$300</span></div>
+          <div class="govref-row"><span><strong>Standing Wreath</strong></span><span>Premium / large display piece</span><span>S$300 – S$500+</span></div>
+          <div class="govref-row"><span><strong>Table Flowers</strong></span><span>Per pot / small arrangement per table</span><span>S$28 – S$45</span></div>
+          <div class="govref-row"><span><strong>Altar / Casket Spray</strong></span><span>Floral arrangement on altar or casket top</span><span>S$88 – S$200</span></div>
+          <div class="govref-row"><span><strong>Flower Coil with Candles</strong></span><span>Candle surrounded by floral coil (Buddhist, Taoist, Catholic)</span><span>S$60 – S$160</span></div>
+          <div class="govref-row"><span><strong>Photo Enlargement</strong></span><span>Printed portrait, typically A2–A1 size</span><span>S$80 – S$150</span></div>
+          <div class="govref-row"><span><strong>Portrait with Frame & Stand</strong></span><span>Framed enlargement on easel stand</span><span>S$150 – S$350</span></div>
+          <div class="govref-row"><span><strong>Cross Wreath</strong></span><span>Cross-shaped floral arrangement (Christian / Catholic)</span><span>S$120 – S$300</span></div>
+        </div>
+
+        <hr class="guide-divider" />
+
+        <!-- BY RELIGION -->
+        <h3 style="margin-bottom:28px;">Flower Customs by Religion</h3>
+        <div class="know-cards" style="margin-bottom:48px;">
+
+          <div class="know-card">
+            <div class="know-card__icon">☸️</div>
+            <h4>Buddhist</h4>
+            <p><strong>Preferred flowers:</strong> White and yellow chrysanthemums, lotus flowers. White represents purity and the release of the soul; yellow is sacred and symbolises wisdom and respect.</p>
+            <p style="margin-top:8px;"><strong>Arrangement style:</strong> Simple, understated round wreaths. Avoid elaborate or showy designs — Buddhism emphasises restraint and the impermanence of life.</p>
+            <p style="margin-top:8px;"><strong>Avoid:</strong> Red or brightly coloured flowers. These are associated with celebration and are considered disrespectful in a mourning context.</p>
+            <p style="margin-top:8px;"><strong>Portrait frame:</strong> Typically placed on the altar table facing the entrance. A white or plain wooden frame is appropriate.</p>
+          </div>
+
+          <div class="know-card">
+            <div class="know-card__icon">☯️</div>
+            <h4>Taoist</h4>
+            <p><strong>Preferred flowers:</strong> White and yellow chrysanthemums, lotus flowers (the lotus is associated with Ho Hsien-Ku, one of the Eight Immortals). Arrangements tend to be more elaborate than Buddhist ones.</p>
+            <p style="margin-top:8px;"><strong>Arrangement style:</strong> Circular wreaths made of white and yellow flowers. Taoist wakes often feature more floral displays and ritual décor overall.</p>
+            <p style="margin-top:8px;"><strong>Additional items:</strong> Flower coils around candles are common at the altar. Paper offerings and joss items are displayed alongside floral décor.</p>
+            <p style="margin-top:8px;"><strong>Avoid:</strong> Red flowers. Mixed colour arrangements with vibrant tones.</p>
+          </div>
+
+          <div class="know-card">
+            <div class="know-card__icon">🏮</div>
+            <h4>Traditional Chinese</h4>
+            <p><strong>Preferred flowers:</strong> White chrysanthemums are the primary choice, symbolising grief and mourning. Pale yellow and white combinations are appropriate.</p>
+            <p style="margin-top:8px;"><strong>Arrangement style:</strong> Standing wreaths with Chinese condolence banners (挽联) are very common — these white banners with black or gold text are displayed alongside the floral stands sent by friends and colleagues.</p>
+            <p style="margin-top:8px;"><strong>Portrait frame:</strong> Placed at the centre-front of the altar. A black-bordered frame is traditional for expressing mourning.</p>
+            <p style="margin-top:8px;"><strong>Avoid:</strong> Red, pink, and orange flowers. Colourful mixed bouquets.</p>
+          </div>
+
+          <div class="know-card">
+            <div class="know-card__icon">✝️</div>
+            <h4>Christian & Catholic</h4>
+            <p><strong>Preferred flowers:</strong> White lilies (resurrection and restored innocence), white roses (purity and reverence), pale pink or lavender arrangements. A broader range of flowers is acceptable compared to Chinese traditions.</p>
+            <p style="margin-top:8px;"><strong>Arrangement style:</strong> Cross-shaped wreaths are particularly meaningful for Christian families. Casket sprays and standing floral tributes are common. Soft, serene arrangements in white and pale tones.</p>
+            <p style="margin-top:8px;"><strong>Portrait frame:</strong> Often placed beside the casket or on a separate table. White or silver frames are common. Some families include a favourite scripture verse on a printed card alongside the portrait.</p>
+            <p style="margin-top:8px;"><strong>Avoid:</strong> Purely red arrangements (unless specifically requested by family).</p>
+          </div>
+
+        </div>
+
+        <hr class="guide-divider" />
+
+        <!-- TIPS -->
+        <h3 style="margin-bottom:20px;">Practical Tips for Families</h3>
+        <div class="know-cards" style="margin-bottom:40px;">
+          <div class="know-card">
+            <div class="know-card__icon">💐</div>
+            <h4>Source Wreaths Directly from Florists</h4>
+            <p>Funeral directors typically mark up floral items by 30–80%. Ordering directly from a florist with same-day delivery (most Singapore florists offer this) saves significantly at no quality loss.</p>
+          </div>
+          <div class="know-card">
+            <div class="know-card__icon">🖼️</div>
+            <h4>Prepare the Portrait Photo Early</h4>
+            <p>Choose a clear, well-lit portrait photo in advance. Printing and framing typically takes 2–4 hours. A digital file (JPG, minimum 1MB) is all the print shop needs. Many offer same-day collection.</p>
+          </div>
+          <div class="know-card">
+            <div class="know-card__icon">🌸</div>
+            <h4>Well-Wisher Wreaths</h4>
+            <p>Friends, colleagues, and organisations typically send standing wreaths as condolences. You can share the wake address and religion with them so their florist selects the right style. Most florists in Singapore are familiar with the customs.</p>
+          </div>
+          <div class="know-card">
+            <div class="know-card__icon">🕯️</div>
+            <h4>Candles & Ritual Items</h4>
+            <p>For Buddhist, Taoist, and Traditional Chinese funerals, candles, incense sticks, and joss offerings are typically arranged by the funeral director as part of the altar setup. Confirm what is included in your package to avoid duplication.</p>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>Note on pricing:</strong> All prices above are market estimates for 2025 and may vary by florist and complexity. Funeral directors sourcing these items on your behalf typically apply a 30–80% markup. Where possible, Passage recommends sourcing floral items directly to keep costs down.
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- FOOTER -->
   <footer class="footer" style="margin-top:40px;">
     <div class="container">
@@ -740,6 +847,7 @@
       taoist:   document.getElementById('panel-taoist'),
       chinese:  document.getElementById('panel-chinese'),
       christian:document.getElementById('panel-christian'),
+      addons:   document.getElementById('panel-addons'),
       general:  document.getElementById('panel-general'),
     };
     const tabs = document.querySelectorAll('.religion-tab');
