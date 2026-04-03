@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Caskets & Prices — Passage</title>
+  <meta name="description" content="Three dignified casket models from S$800. Fully transparent pricing. Delivered across Singapore within 3 hours. No hidden fees." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .page-body { padding-top: 108px; }
+
+    /* Page header */
+    .page-header {
+      background: var(--charcoal);
+      padding: 64px 0 56px;
+      text-align: center;
+      color: var(--white);
+    }
+    .page-header h1 { color: var(--white); margin-bottom: 16px; }
+    .page-header p { color: rgba(255,255,255,0.7); max-width: 560px; margin: 0 auto; }
+
+    /* Guarantee bar */
+    .guarantee-bar {
+      background: var(--deep);
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .guarantee-bar__inner {
+      display: flex; justify-content: center; align-items: center;
+      gap: 32px; flex-wrap: wrap;
+    }
+    .guarantee-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.8rem; font-weight: 500; color: rgba(255,255,255,0.7);
+    }
+    .guarantee-item span:first-child { color: var(--gold); }
+
+    /* Product section */
+    .product-section {
+      padding: 80px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .product-section:last-of-type { border-bottom: none; }
+    .product-section.alt { background: var(--light); }
+
+    .product-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .product-visual {
+      position: sticky; top: 100px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .product-visual__main {
+      background: var(--light);
+      height: 320px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 8rem;
+      border-radius: var(--radius-lg);
+      margin-bottom: 16px;
+    }
+    .product-section.alt .product-visual__main { background: #e8e8e4; }
+    .product-visual__main.dark { background: var(--charcoal); }
+    .product-thumbs {
+      display: flex; gap: 10px;
+    }
+    .product-thumb {
+      flex: 1; height: 72px;
+      background: var(--light);
+      border-radius: var(--radius);
+      border: 2px solid transparent;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      transition: var(--transition);
+    }
+    .product-thumb:hover, .product-thumb.active { border-color: var(--gold); }
+
+    /* Product info */
+    .product-tag { margin-bottom: 12px; }
+    .product-name { font-family: var(--font-serif); font-size: 2.4rem; margin-bottom: 8px; }
+    .product-tagline { font-size: 1.05rem; color: var(--muted); margin-bottom: 24px; font-style: italic; }
+
+    .price-block {
+      background: var(--gold-pale);
+      border: 1px solid rgba(184,150,90,0.3);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 28px;
+    }
+    .price-block__label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .price-block__main { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+    .price-block__amount { font-family: var(--font-serif); font-size: 2.8rem; font-weight: 700; color: var(--charcoal); line-height: 1; }
+    .price-block__compare { font-size: 0.875rem; color: var(--muted); }
+    .price-block__compare del { font-size: 1rem; color: var(--accent-red); }
+    .price-block__saving { font-size: 0.9rem; font-weight: 600; color: var(--green); margin-top: 4px; }
+    .price-breakdown { margin-top: 14px; border-top: 1px solid rgba(184,150,90,0.2); padding-top: 14px; }
+    .price-breakdown__row {
+      display: flex; justify-content: space-between;
+      font-size: 0.85rem; color: var(--mid); margin-bottom: 6px;
+    }
+    .price-breakdown__row.total { font-weight: 700; color: var(--charcoal); border-top: 1px solid rgba(0,0,0,0.1); padding-top: 8px; margin-top: 4px; }
+
+    /* Features */
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .feature-item {
+      display: flex; gap: 8px; align-items: flex-start;
+      font-size: 0.875rem;
+    }
+    .feature-item::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; }
+
+    /* Specs table */
+    .specs { margin-bottom: 28px; }
+    .specs h4 { margin-bottom: 12px; }
+    .spec-row {
+      display: flex; justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.875rem;
+    }
+    .spec-row:last-child { border-bottom: none; }
+    .spec-row__label { color: var(--muted); }
+    .spec-row__value { font-weight: 500; }
+
+    /* CTA buttons */
+    .product-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+    .product-cta .btn { flex: 1; justify-content: center; min-width: 160px; }
+
+    /* Comparison table */
+    .compare-section { padding: 80px 0; background: var(--light); }
+    .compare-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); }
+    .compare-table th {
+      background: var(--charcoal); color: var(--white);
+      padding: 16px 20px; text-align: left;
+      font-family: var(--font-serif); font-size: 1rem;
+      font-weight: 600;
+    }
+    .compare-table th:first-child { background: var(--deep); color: rgba(255,255,255,0.6); font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+    .compare-table th.featured { background: var(--gold); }
+    .compare-table td { padding: 14px 20px; font-size: 0.875rem; border-bottom: 1px solid var(--border); }
+    .compare-table td:first-child { color: var(--muted); font-weight: 500; }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table .check { color: var(--green); font-size: 1rem; }
+    .compare-table .dash { color: var(--border); }
+    .compare-table tr:hover td { background: var(--light); }
+
+    /* Checkout modal */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 2000;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      max-width: 480px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: translateY(20px);
+      transition: transform 0.25s ease;
+    }
+    .modal-overlay.open .modal { transform: translateY(0); }
+    .modal__close {
+      position: absolute; top: 16px; right: 20px;
+      font-size: 1.5rem; color: var(--muted); cursor: pointer;
+    }
+    .modal__title { font-family: var(--font-serif); font-size: 1.6rem; margin-bottom: 6px; }
+    .modal__sub { font-size: 0.9rem; color: var(--muted); margin-bottom: 24px; }
+    .modal__price-tag { background: var(--gold-pale); border-radius: var(--radius); padding: 14px 18px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; }
+    .modal__price-tag span:first-child { font-size: 0.85rem; color: var(--muted); }
+    .modal__price-tag span:last-child { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; color: var(--gold); }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--mid); margin-bottom: 6px; letter-spacing: 0.04em; text-transform: uppercase; }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-family: var(--font-sans); font-size: 0.95rem;
+      transition: var(--transition);
+      background: var(--white);
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      outline: none; border-color: var(--gold);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-note { font-size: 0.8rem; color: var(--muted); margin-top: 10px; line-height: 1.5; }
+    .checkout-success { text-align: center; padding: 20px 0; display: none; }
+    .checkout-success__icon { font-size: 3rem; margin-bottom: 16px; }
+    .checkout-success h3 { font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 10px; }
+
+    /* Animate */
+    .animate { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .animate.visible { opacity: 1; transform: translateY(0); }
+
+    /* Mobile nav */
+    .nav__mobile { background: var(--charcoal); max-height: 0; overflow: hidden; transition: max-height 0.3s ease; border-top: 1px solid rgba(255,255,255,0.06); }
+    .nav__mobile.open { max-height: 400px; }
+    .nav__mobile ul { padding: 16px 24px; display: flex; flex-direction: column; gap: 4px; }
+    .nav__mobile a { display: block; padding: 10px 0; font-size: 0.9rem; color: rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav__mobile .btn { margin: 8px 24px 16px; display: block; text-align: center; }
+
+    @media (max-width: 768px) {
+      .product-layout { grid-template-columns: 1fr; }
+      .product-visual { position: static; }
+      .features-grid { grid-template-columns: 1fr; }
+      .compare-table th, .compare-table td { padding: 10px 12px; font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body class="page-body">
+
+  <!-- NAV -->
+  <div class="hotline-strip">
+    24-Hour Helpline &nbsp;|&nbsp; <a href="tel:+6580001234">+65 8000 1234</a> &nbsp;·&nbsp; Delivery within 3 hours across Singapore &nbsp;·&nbsp; No hidden fees. Ever.
+  </div>
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">Pass<span>age</span></a>
+      <ul class="nav__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html" class="active">Our Caskets</a></li>
+        <li><a href="knowledge.html">Funeral Guide</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="accreditation.html">Our Commitments</a></li>
+      </ul>
+      <a href="#serene" class="btn btn--primary nav__cta">Order Now</a>
+      <button class="nav__hamburger" onclick="toggleMobileNav()"><span></span><span></span><span></span></button>
+    </div>
+    <div class="nav__mobile" id="mobileNav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Our Caskets</a></li>
+        <li><a href="knowledge.html">Funeral Guide</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="accreditation.html">Our Commitments</a></li>
+      </ul>
+      <a href="#serene" class="btn btn--primary">Order Now</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="container">
+      <p class="section-label" style="text-align:center;">Transparent Pricing — Always</p>
+      <h1>Our Caskets</h1>
+      <p>Three dignified options. Every price shown. No packages, no pressure, no hidden fees. Delivered island-wide within 3 hours of your order.</p>
+    </div>
+  </div>
+
+  <!-- GUARANTEE BAR -->
+  <div class="guarantee-bar">
+    <div class="guarantee-bar__inner">
+      <div class="guarantee-item"><span>⏱</span> 3-Hour Island-Wide Delivery</div>
+      <div class="guarantee-item"><span>🔖</span> All-In Price — No Add-Ons</div>
+      <div class="guarantee-item"><span>🌿</span> FSC-Certified Sustainable Timber</div>
+      <div class="guarantee-item"><span>🇸🇬</span> Assembled in Singapore</div>
+      <div class="guarantee-item"><span>📞</span> 24/7 Support Included</div>
+    </div>
+  </div>
+
+  <!-- PRODUCT 1: SERENE -->
+  <section class="product-section" id="serene">
+    <div class="container">
+      <div class="product-layout animate">
+        <div class="product-visual">
+          <div class="product-visual__main">🪵</div>
+          <div class="product-thumbs">
+            <div class="product-thumb active">🪵</div>
+            <div class="product-thumb">📐</div>
+            <div class="product-thumb">🌿</div>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-tag"><span class="badge badge--gold">Essential</span></div>
+          <h2 class="product-name">Serene</h2>
+          <p class="product-tagline">Simple, honest, and quietly dignified.</p>
+
+          <div class="price-block">
+            <p class="price-block__label">Full Transparent Price</p>
+            <div class="price-block__main">
+              <span class="price-block__amount">S$800</span>
+              <div class="price-block__compare">
+                Typical funeral package: <del>S$2,000–$2,500</del>
+                <div class="price-block__saving">You save approximately S$1,200–$1,700</div>
+              </div>
+            </div>
+            <div class="price-breakdown">
+              <div class="price-breakdown__row"><span>Casket (FSC Pine, local assembly)</span><span>S$620</span></div>
+              <div class="price-breakdown__row"><span>Delivery (island-wide, within 3 hrs)</span><span>S$120</span></div>
+              <div class="price-breakdown__row"><span>Handling &amp; positioning at venue</span><span>S$60</span></div>
+              <div class="price-breakdown__row total"><span>Total (incl. GST)</span><span>S$800</span></div>
+            </div>
+          </div>
+
+          <div class="features-grid">
+            <div class="feature-item">FSC-certified pine timber</div>
+            <div class="feature-item">White satin interior lining</div>
+            <div class="feature-item">Adjustable interior pillow</div>
+            <div class="feature-item">Solid wood side handles</div>
+            <div class="feature-item">Engraved name plate (included)</div>
+            <div class="feature-item">Island-wide 3-hour delivery</div>
+            <div class="feature-item">Positioning at venue</div>
+            <div class="feature-item">24/7 phone support</div>
+          </div>
+
+          <div class="specs">
+            <h4>Specifications</h4>
+            <div class="spec-row"><span class="spec-row__label">Material</span><span class="spec-row__value">FSC-certified pine</span></div>
+            <div class="spec-row"><span class="spec-row__label">Interior</span><span class="spec-row__value">White satin, polyester fill</span></div>
+            <div class="spec-row"><span class="spec-row__label">Finish</span><span class="spec-row__value">Natural lacquer</span></div>
+            <div class="spec-row"><span class="spec-row__label">Handles</span><span class="spec-row__value">Solid wood, 6 point</span></div>
+            <div class="spec-row"><span class="spec-row__label">Dimensions (L×W×H)</span><span class="spec-row__value">210 × 66 × 58 cm</span></div>
+            <div class="spec-row"><span class="spec-row__label">Weight capacity</span><span class="spec-row__value">180 kg</span></div>
+            <div class="spec-row"><span class="spec-row__label">Assembly origin</span><span class="spec-row__value">Singapore</span></div>
+          </div>
+
+          <div class="product-cta">
+            <button class="btn btn--primary" onclick="openCheckout('Serene', 800, 'serene')">Order Now — S$800</button>
+            <a href="faq.html" class="btn btn--outline">Questions? Read FAQ</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT 2: TRANQUIL -->
+  <section class="product-section alt" id="tranquil">
+    <div class="container">
+      <div class="product-layout animate">
+        <div class="product-visual">
+          <div class="product-visual__main" style="background:linear-gradient(135deg,#f0e8d8,#e8dcc8); font-size:7rem;">🏺</div>
+          <div class="product-thumbs">
+            <div class="product-thumb active" style="background:linear-gradient(135deg,#f0e8d8,#e8dcc8);">🏺</div>
+            <div class="product-thumb">📐</div>
+            <div class="product-thumb">✨</div>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-tag">
+            <span class="badge badge--gold">Most Popular</span>
+            &nbsp;<span class="badge badge--green">Best Value</span>
+          </div>
+          <h2 class="product-name">Tranquil</h2>
+          <p class="product-tagline">Our most chosen casket. Warmth, quality, and quiet elegance.</p>
+
+          <div class="price-block">
+            <p class="price-block__label">Full Transparent Price</p>
+            <div class="price-block__main">
+              <span class="price-block__amount">S$1,000</span>
+              <div class="price-block__compare">
+                Typical funeral package: <del>S$2,800–$3,500</del>
+                <div class="price-block__saving">You save approximately S$1,800–$2,500</div>
+              </div>
+            </div>
+            <div class="price-breakdown">
+              <div class="price-breakdown__row"><span>Casket (hardwood, local assembly)</span><span>S$790</span></div>
+              <div class="price-breakdown__row"><span>Delivery (island-wide, within 3 hrs)</span><span>S$120</span></div>
+              <div class="price-breakdown__row"><span>Handling &amp; positioning at venue</span><span>S$90</span></div>
+              <div class="price-breakdown__row total"><span>Total (incl. GST)</span><span>S$1,000</span></div>
+            </div>
+          </div>
+
+          <div class="features-grid">
+            <div class="feature-item">Premium hardwood (local assembly)</div>
+            <div class="feature-item">Ivory velvet interior lining</div>
+            <div class="feature-item">Memory foam interior pillow</div>
+            <div class="feature-item">Brushed nickel handles</div>
+            <div class="feature-item">Engraved brass name plate</div>
+            <div class="feature-item">Interior floral arrangement</div>
+            <div class="feature-item">Island-wide 3-hour delivery</div>
+            <div class="feature-item">24/7 phone support</div>
+          </div>
+
+          <div class="specs">
+            <h4>Specifications</h4>
+            <div class="spec-row"><span class="spec-row__label">Material</span><span class="spec-row__value">FSC-certified hardwood blend</span></div>
+            <div class="spec-row"><span class="spec-row__label">Interior</span><span class="spec-row__value">Ivory velvet, memory foam</span></div>
+            <div class="spec-row"><span class="spec-row__label">Finish</span><span class="spec-row__value">Satin walnut stain</span></div>
+            <div class="spec-row"><span class="spec-row__label">Handles</span><span class="spec-row__value">Brushed nickel, 6 point</span></div>
+            <div class="spec-row"><span class="spec-row__label">Dimensions (L×W×H)</span><span class="spec-row__value">210 × 66 × 60 cm</span></div>
+            <div class="spec-row"><span class="spec-row__label">Weight capacity</span><span class="spec-row__value">200 kg</span></div>
+            <div class="spec-row"><span class="spec-row__label">Assembly origin</span><span class="spec-row__value">Singapore</span></div>
+          </div>
+
+          <div class="product-cta">
+            <button class="btn btn--primary" onclick="openCheckout('Tranquil', 1000, 'tranquil')">Order Now — S$1,000</button>
+            <a href="faq.html" class="btn btn--outline">Questions? Read FAQ</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT 3: ETERNAL -->
+  <section class="product-section" id="eternal">
+    <div class="container">
+      <div class="product-layout animate">
+        <div class="product-visual">
+          <div class="product-visual__main dark" style="font-size:7rem;">⬛</div>
+          <div class="product-thumbs">
+            <div class="product-thumb active" style="background:var(--charcoal);">⬛</div>
+            <div class="product-thumb">📐</div>
+            <div class="product-thumb">✨</div>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-tag"><span class="badge badge--dark">Premium</span></div>
+          <h2 class="product-name">Eternal</h2>
+          <p class="product-tagline">A lasting tribute to a life fully lived. Our finest craftsmanship.</p>
+
+          <div class="price-block">
+            <p class="price-block__label">Full Transparent Price</p>
+            <div class="price-block__main">
+              <span class="price-block__amount">S$1,200</span>
+              <div class="price-block__compare">
+                Typical funeral package: <del>S$3,500–$4,500</del>
+                <div class="price-block__saving">You save approximately S$2,300–$3,300</div>
+              </div>
+            </div>
+            <div class="price-breakdown">
+              <div class="price-breakdown__row"><span>Casket (solid mahogany, hand-finished)</span><span>S$970</span></div>
+              <div class="price-breakdown__row"><span>Delivery (island-wide, within 3 hrs)</span><span>S$120</span></div>
+              <div class="price-breakdown__row"><span>Handling &amp; positioning at venue</span><span>S$110</span></div>
+              <div class="price-breakdown__row total"><span>Total (incl. GST)</span><span>S$1,200</span></div>
+            </div>
+          </div>
+
+          <div class="features-grid">
+            <div class="feature-item">Solid mahogany (FSC-certified)</div>
+            <div class="feature-item">Deep burgundy silk interior</div>
+            <div class="feature-item">Hand-stitched memory foam pillow</div>
+            <div class="feature-item">Solid brass handles, 8-point</div>
+            <div class="feature-item">Hand-engraved brass nameplate</div>
+            <div class="feature-item">Premium floral arrangement</div>
+            <div class="feature-item">Priority 2-hour delivery available</div>
+            <div class="feature-item">Dedicated care coordinator</div>
+          </div>
+
+          <div class="specs">
+            <h4>Specifications</h4>
+            <div class="spec-row"><span class="spec-row__label">Material</span><span class="spec-row__value">Solid FSC-certified mahogany</span></div>
+            <div class="spec-row"><span class="spec-row__label">Interior</span><span class="spec-row__value">Burgundy silk, hand-stitched foam</span></div>
+            <div class="spec-row"><span class="spec-row__label">Finish</span><span class="spec-row__value">Hand-polished dark mahogany</span></div>
+            <div class="spec-row"><span class="spec-row__label">Handles</span><span class="spec-row__value">Solid brass, 8-point</span></div>
+            <div class="spec-row"><span class="spec-row__label">Dimensions (L×W×H)</span><span class="spec-row__value">210 × 68 × 62 cm</span></div>
+            <div class="spec-row"><span class="spec-row__label">Weight capacity</span><span class="spec-row__value">220 kg</span></div>
+            <div class="spec-row"><span class="spec-row__label">Assembly origin</span><span class="spec-row__value">Singapore (hand-finished)</span></div>
+          </div>
+
+          <div class="product-cta">
+            <button class="btn btn--primary" onclick="openCheckout('Eternal', 1200, 'eternal')">Order Now — S$1,200</button>
+            <a href="faq.html" class="btn btn--outline">Questions? Read FAQ</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON TABLE -->
+  <section class="compare-section">
+    <div class="container">
+      <div class="text-center animate" style="margin-bottom:40px;">
+        <p class="section-label">Side by Side</p>
+        <h2>Compare All Models</h2>
+        <div class="divider divider--center"></div>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="compare-table animate">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Serene</th>
+              <th class="featured">Tranquil <span style="font-size:0.7rem; font-weight:400; opacity:0.8;">★ Popular</span></th>
+              <th>Eternal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Price (all-in)</td><td><strong>S$800</strong></td><td><strong>S$1,000</strong></td><td><strong>S$1,200</strong></td></tr>
+            <tr><td>Timber</td><td>FSC Pine</td><td>Hardwood blend</td><td>Solid Mahogany</td></tr>
+            <tr><td>Interior</td><td>White satin</td><td>Ivory velvet</td><td>Burgundy silk</td></tr>
+            <tr><td>Pillow</td><td>Standard</td><td>Memory foam</td><td>Hand-stitched foam</td></tr>
+            <tr><td>Handles</td><td>Solid wood</td><td>Brushed nickel</td><td>Solid brass</td></tr>
+            <tr><td>Name plate</td><td class="check">✓ Engraved</td><td class="check">✓ Brass engraved</td><td class="check">✓ Hand-engraved brass</td></tr>
+            <tr><td>Floral arrangement</td><td class="dash">—</td><td class="check">✓ Included</td><td class="check">✓ Premium</td></tr>
+            <tr><td>Delivery</td><td>3-hr island-wide</td><td>3-hr island-wide</td><td>2-hr priority available</td></tr>
+            <tr><td>Care coordinator</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓ Dedicated</td></tr>
+            <tr><td>Assembled in Singapore</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓ Hand-finished</td></tr>
+            <tr><td>FSC Certified timber</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHECKOUT MODAL -->
+  <div class="modal-overlay" id="checkoutModal" onclick="closeCheckoutOnOverlay(event)">
+    <div class="modal" style="position:relative;">
+      <span class="modal__close" onclick="closeCheckout()">×</span>
+      <div id="checkoutForm">
+        <h2 class="modal__title">Place Your Order</h2>
+        <p class="modal__sub">Fill in your details — our team will confirm and dispatch within the hour.</p>
+        <div class="modal__price-tag">
+          <span id="co-model">—</span>
+          <span id="co-price">—</span>
+        </div>
+        <form onsubmit="submitCheckout(event)">
+          <input type="hidden" id="co-input-model" name="model" />
+          <div class="form-row">
+            <div class="form-group"><label>First Name</label><input type="text" required placeholder="Wei Ming" /></div>
+            <div class="form-group"><label>Last Name</label><input type="text" required placeholder="Tan" /></div>
+          </div>
+          <div class="form-group"><label>Mobile Number</label><input type="tel" required placeholder="+65 9XXX XXXX" /></div>
+          <div class="form-group"><label>Email Address</label><input type="email" required placeholder="you@email.com" /></div>
+          <div class="form-group"><label>Delivery Address</label><input type="text" required placeholder="Block / Street / Unit, Singapore XXXXXX" /></div>
+          <div class="form-group">
+            <label>Required Delivery Time</label>
+            <select required>
+              <option value="">Select a window</option>
+              <option>Within 1 hour (Emergency)</option>
+              <option>Within 2 hours</option>
+              <option>Within 3 hours</option>
+              <option>I will confirm the time via phone</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Special Requests (optional)</label><textarea rows="2" placeholder="e.g. Buddhist setup, ground floor access needed…"></textarea></div>
+          <p class="form-note">⚑ Payment is collected upon delivery. We accept cash, PayNow, and all major cards. Our team will call you within 15 minutes to confirm.</p>
+          <button type="submit" class="btn btn--primary" style="width:100%; justify-content:center; margin-top:16px;">Confirm Order →</button>
+        </form>
+      </div>
+      <div class="checkout-success" id="checkoutSuccess">
+        <div class="checkout-success__icon">✅</div>
+        <h3>Order Received</h3>
+        <p>Our team will call you within <strong>15 minutes</strong> to confirm delivery. If you need us sooner, call <a href="tel:+6580001234" style="color:var(--gold);">+65 8000 1234</a>.</p>
+        <button onclick="closeCheckout()" class="btn btn--outline" style="margin-top:20px;">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <p class="footer__brand">Pass<span>age</span></p>
+          <p class="footer__tagline">"Because grief is burden enough."</p>
+          <p style="font-size:0.8rem; line-height:1.7;">Assembled in Singapore. Sustainably sourced. A social enterprise — 30% of net profits donated to charity. Free caskets for the needy.</p>
+        </div>
+        <div class="footer__col"><h5>Products</h5>
+          <a href="#serene">Serene — S$800</a>
+          <a href="#tranquil">Tranquil — S$1,000</a>
+          <a href="#eternal">Eternal — S$1,200</a>
+        </div>
+        <div class="footer__col"><h5>Information</h5>
+          <a href="knowledge.html">Funeral Guide</a>
+          <a href="faq.html">FAQ & Your Rights</a>
+          <a href="accreditation.html">Certifications</a>
+        </div>
+        <div class="footer__col"><h5>Contact</h5>
+          <a href="tel:+6580001234">+65 8000 1234</a>
+          <a href="mailto:care@passage.sg">care@passage.sg</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2025 Passage Caskets Pte. Ltd. · Singapore</p>
+        <div class="footer__badge">
+          <span>Progressive Wage Model</span><span>Tripartite Standards</span><span>FSC Certified</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="scripts.js"></script>
+  <script>
+    function closeCheckoutOnOverlay(e) {
+      if (e.target === document.getElementById('checkoutModal')) closeCheckout();
+    }
+  </script>
+</body>
+</html>

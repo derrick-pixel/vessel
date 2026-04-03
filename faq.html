@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ & Your Rights — Passage</title>
+  <meta name="description" content="Know your rights as a consumer. How to handle funeral director pressure. Real answers for grieving families in Singapore." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .page-body { padding-top: 108px; }
+
+    .page-header { background: var(--charcoal); padding: 64px 0 56px; text-align: center; color: var(--white); }
+    .page-header h1 { color: var(--white); margin-bottom: 16px; }
+    .page-header p { color: rgba(255,255,255,0.7); max-width: 600px; margin: 0 auto; }
+
+    /* Tab navigation */
+    .tab-nav {
+      background: var(--white);
+      border-bottom: 2px solid var(--border);
+      position: sticky; top: 108px; z-index: 100;
+    }
+    .tab-nav__inner {
+      display: flex; overflow-x: auto;
+      max-width: var(--max-width); margin: 0 auto; padding: 0 24px;
+    }
+    .tab-btn {
+      padding: 16px 24px;
+      font-size: 0.875rem; font-weight: 600;
+      color: var(--muted);
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      cursor: pointer;
+      transition: var(--transition);
+      background: none;
+    }
+    .tab-btn:hover { color: var(--charcoal); }
+    .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+    /* Rights alert */
+    .rights-alert {
+      background: var(--charcoal);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+      padding: 24px 28px;
+      margin-bottom: 40px;
+    }
+    .rights-alert h3 { color: var(--gold); font-family: var(--font-serif); margin-bottom: 10px; }
+    .rights-alert p { color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.7; }
+
+    /* Accordion */
+    .accordion { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 16px; }
+    .accordion__trigger {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 24px; cursor: pointer; background: var(--white);
+      transition: var(--transition); width: 100%; text-align: left;
+    }
+    .accordion__trigger:hover { background: var(--light); }
+    .accordion.open .accordion__trigger { background: var(--gold-pale); }
+    .accordion__question { font-weight: 600; font-size: 0.95rem; color: var(--charcoal); line-height: 1.4; }
+    .accordion__icon { font-size: 1.2rem; color: var(--gold); flex-shrink: 0; margin-left: 16px; transition: transform 0.25s; }
+    .accordion.open .accordion__icon { transform: rotate(45deg); }
+    .accordion__body { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .accordion__content { padding: 0 24px 20px; border-top: 1px solid var(--border); }
+    .accordion__content p { font-size: 0.9rem; margin-top: 14px; line-height: 1.75; }
+    .accordion__content ul { margin: 12px 0 4px 0; padding-left: 20px; }
+    .accordion__content ul li { font-size: 0.875rem; color: var(--mid); margin-bottom: 8px; line-height: 1.6; list-style: disc; }
+    .accordion__content .tip {
+      background: var(--gold-pale); border-radius: var(--radius);
+      padding: 12px 16px; margin-top: 14px;
+      font-size: 0.85rem; color: var(--charcoal); line-height: 1.6;
+    }
+    .accordion__content .tip strong { color: var(--gold); }
+    .accordion__content .warning {
+      background: #fff8f0; border: 1px solid #f0c97a;
+      border-radius: var(--radius); padding: 12px 16px; margin-top: 14px;
+      font-size: 0.85rem; line-height: 1.6;
+    }
+
+    /* Script card */
+    .script-card {
+      background: var(--deep);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      margin: 28px 0;
+    }
+    .script-card__label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 12px;
+    }
+    .script-card__text {
+      font-size: 0.95rem; color: var(--white); line-height: 1.75; font-style: italic;
+      border-left: 2px solid var(--gold); padding-left: 16px;
+    }
+
+    /* Testimonials */
+    .testimonials-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; }
+    .testimonial { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; }
+    .testimonial__stars { color: var(--gold); margin-bottom: 12px; }
+    .testimonial__body { font-size: 0.9rem; line-height: 1.7; color: var(--mid); font-style: italic; margin-bottom: 20px; }
+    .testimonial__author { display: flex; align-items: center; gap: 12px; }
+    .testimonial__avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--gold-pale); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; color: var(--gold); }
+    .testimonial__name { font-size: 0.875rem; font-weight: 600; }
+    .testimonial__detail { font-size: 0.75rem; color: var(--muted); }
+
+    .tab-panel { display: none; padding: 64px 0; }
+    .tab-panel.active { display: block; }
+
+    /* Animate */
+    .animate { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .animate.visible { opacity: 1; transform: translateY(0); }
+
+    /* Mobile nav */
+    .nav__mobile { background: var(--charcoal); max-height: 0; overflow: hidden; transition: max-height 0.3s ease; border-top: 1px solid rgba(255,255,255,0.06); }
+    .nav__mobile.open { max-height: 400px; }
+    .nav__mobile ul { padding: 16px 24px; display: flex; flex-direction: column; gap: 4px; }
+    .nav__mobile a { display: block; padding: 10px 0; font-size: 0.9rem; color: rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav__mobile .btn { margin: 8px 24px 16px; display: block; text-align: center; }
+
+    @media (max-width: 640px) {
+      .testimonials-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body class="page-body">
+
+  <!-- NAV -->
+  <div class="hotline-strip">
+    24-Hour Helpline &nbsp;|&nbsp; <a href="tel:+6580001234">+65 8000 1234</a> &nbsp;·&nbsp; Delivery within 3 hours across Singapore &nbsp;·&nbsp; No hidden fees. Ever.
+  </div>
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">Pass<span>age</span></a>
+      <ul class="nav__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Our Caskets</a></li>
+        <li><a href="knowledge.html">Funeral Guide</a></li>
+        <li><a href="faq.html" class="active">FAQ</a></li>
+        <li><a href="accreditation.html">Our Commitments</a></li>
+      </ul>
+      <a href="products.html" class="btn btn--primary nav__cta">View Prices</a>
+      <button class="nav__hamburger" onclick="toggleMobileNav()"><span></span><span></span><span></span></button>
+    </div>
+    <div class="nav__mobile" id="mobileNav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Our Caskets</a></li>
+        <li><a href="knowledge.html">Funeral Guide</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="accreditation.html">Our Commitments</a></li>
+      </ul>
+      <a href="products.html" class="btn btn--primary">View Prices</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="container">
+      <p class="section-label" style="text-align:center;">Your Rights Matter</p>
+      <h1>FAQ & How to Handle Funeral Directors</h1>
+      <p>Honest answers to the questions families ask most. Including exactly what to say when a funeral director pressures you over your casket choice.</p>
+    </div>
+  </div>
+
+  <!-- TAB NAV -->
+  <div class="tab-nav">
+    <div class="tab-nav__inner">
+      <button class="tab-btn active" onclick="switchTab(0)">Your Rights</button>
+      <button class="tab-btn" onclick="switchTab(1)">Ordering from Passage</button>
+      <button class="tab-btn" onclick="switchTab(2)">What to Say</button>
+      <button class="tab-btn" onclick="switchTab(3)">Quality & Delivery</button>
+      <button class="tab-btn" onclick="switchTab(4)">Testimonials</button>
+    </div>
+  </div>
+
+  <!-- TAB 1: YOUR RIGHTS -->
+  <div class="tab-panel active" id="panel-0">
+    <div class="container">
+      <div class="rights-alert animate">
+        <h3>Know This First</h3>
+        <p>In Singapore, you have the legal right to purchase a casket from any supplier. A funeral director cannot lawfully refuse to provide services solely because you have sourced your own casket. If they threaten to withdraw service, you can escalate to the Consumers Association of Singapore (CASE) at <strong>1800-773-3518</strong>.</p>
+      </div>
+
+      <div class="animate">
+        <div class="accordion" id="acc1">
+          <button class="accordion__trigger">
+            <span class="accordion__question">Can I buy a casket from Passage and still use my own funeral director?</span>
+            <span class="accordion__icon">+</span>
+          </button>
+          <div class="accordion__body">
+            <div class="accordion__content">
+              <p>Yes. You have a legal right to source your own casket from any supplier. The funeral director you engage is obligated to use the casket you provide. They may express a preference for their own supplier, but they cannot make this a condition of service.</p>
+              <div class="tip"><strong>Tip:</strong> Order from Passage first, confirm delivery, then inform your funeral director that the casket is arranged separately. This removes their leverage entirely.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion">
+          <button class="accordion__trigger">
+            <span class="accordion__question">What if the funeral director refuses to service us because we brought our own casket?</span>
+            <span class="accordion__icon">+</span>
+          </button>
+          <div class="accordion__body">
+            <div class="accordion__content">
+              <p>This is a coercive business practice. You have several options:</p>
+              <ul>
+                <li>Calmly state: "We understand our right to procure our own casket. Refusing service on this basis is a matter we will raise with CASE if necessary."</li>
+                <li>Contact the Consumers Association of Singapore (CASE) at <strong>1800-773-3518</strong></li>
+                <li>Call us at <strong>+65 8000 1234</strong> — we can sometimes help mediate or recommend alternative funeral service providers</li>
+                <li>Engage a different funeral director — there are many reputable providers who respect consumer rights</li>
+              </ul>
+              <div class="warning">⚠️ While rare, some funeral directors do attempt this tactic. Being prepared with a clear, calm script makes it far less likely they will persist. See our "What to Say" tab for exact phrasing.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion">
+          <button class="accordion__trigger">
+            <span class="accordion__question">Is the casket price really hidden inside funeral packages?</span>
+            <span class="accordion__icon">+</span>
+          </button>
+          <div class="accordion__body">
+            <div class="accordion__content">
+              <p>In most cases, yes. Funeral packages in Singapore are typically quoted as a single lump sum. When families ask for a breakdown, they are often told the casket is a minor component — when in reality it frequently represents S$2,000–$4,000 of the total package cost, at significant markup over actual production costs.</p>
+              <p>CASE has received complaints about this opacity. You are entitled to request an itemised bill. Any reputable funeral director should provide one.</p>
+              <div class="tip"><strong>Your right:</strong> Under the Consumer Protection (Fair Trading) Act, withholding material pricing information is considered an unfair practice. You may request a full itemised breakdown before signing any agreement.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion">
+          <button class="accordion__trigger">
+            <span class="accordion__question">Can I request an itemised breakdown from my funeral director?</span>
+            <span class="accordion__icon">+</span>
+          </button>
+          <div class="accordion__body">
+            <div class="accordion__content">
+              <p>Absolutely. You should always request an itemised quote before signing. A professional funeral director should be transparent about costs. If they refuse to itemise, treat that as a red flag and consider engaging a different provider.</p>
+              <ul>
+                <li>Ask specifically: "Can you provide an itemised breakdown, including the casket, hearse, embalming, ceremony setup, and any other charges?"</li>
+                <li>Request this in writing (WhatsApp or email) before any verbal agreement</li>
+                <li>Do not sign anything under time pressure without a breakdown</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion">
+          <button class="accordion__trigger">
+            <span class="accordion__question">What is the usual markup on caskets within funeral packages?</span>
+            <span class="accordion__icon">+</span>
+          </button>
+          <div class="accordion__body">
+            <div class="accordion__content">
+              <p>Based on industry estimates and feedback from families, caskets that cost S$400–$700 to produce and source are regularly sold as part of packages at S$2,000–$4,500 — a markup of 300–600%.</p>
+              <p>Passage's pricing model is different: we publish a transparent cost breakdown (materials + assembly + delivery + positioning) and sell directly to families. Our margin is modest and declared openly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: ORDERING -->
+  <div class="tab-panel" id="panel-1">
+    <div class="container">
+      <div class="animate">
+        <div class="accordion">
+          <button class="accordion__trigger">
+            <span class="accordion__question">How do I order and how quickly can you deliver?</span>
+            <span class="accordion__icon">+</span>
+          </button>
+          <div class="accordion__body">
+            <div class="accordion__content">
+              <p>Order directly from our <a href="products.html" style="color:var(--gold);">Products page</a> or call us at <strong>+65 8000 1234</strong>. We confirm within 15 minutes and deliver anywhere in Singapore within 3 hours. For urgent cases, our Emergency delivery can be arranged within 1–2 hours.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion">
+          <button class="accordion__trigger">
+            <span class="accordion__question">Is the price truly all-in? Are there any extra charges?</span>
+            <span class="accordion__icon">+</span>
+          </button>
+          <div class="accordion__body">
+            <div class="accordion__content">
+              <p>Yes — fully all-in. The price you see includes the casket, island-wide delivery, and positioning at the venue. GST is included. There are no surcharges for distance, time of day, or type of premises.</p>
+              <p>The only optional add-on is a dedicated care coordinator (included free with the Eternal model).</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion">
+          <button class="accordion__trigger">
+            <span class="accordion__question">When is payment collected?</span>
+            <span class="accordion__icon">+</span>
+          </button>
+          <div class="accordion__body">
+            <div class="accordion__content">
+              <p>Payment is collected upon delivery. We accept <strong>cash, PayNow, and all major credit/debit cards</strong>. We do not require upfront payment or deposits. We understand you are in a difficult moment — we want to remove every possible friction.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion">
+          <button class="accordion__trigger">
+            <span class="accordion__question">Can I order even if I haven't engaged a funeral director yet?</span>
+            <span class="accordion__icon">+</span>
+          </button>
+          <div class="accordion__body">
+            <div class="accordion__content">
+              <p>Yes. You can order your casket at any time. We can also deliver to a holding location if your venue or arrangements are still being finalised. Our 24/7 team can advise you on logistics.</p>
+              <div class="tip"><strong>Tip:</strong> Securing the casket early removes one of the key pressure points funeral directors use to upsell packages.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion">
+          <button class="accordion__trigger">
+            <span class="accordion__question">Do you offer free caskets for needy families?</span>
+            <span class="accordion__icon">+</span>
+          </button>
+          <div class="accordion__body">
+            <div class="accordion__content">
+              <p>Yes. We provide free caskets to families who cannot afford one, and to Singaporeans who pass without next-of-kin. This is a founding commitment of Passage, not a marketing initiative.</p>
+              <p>To apply, call our team at <strong>+65 8000 1234</strong>. We handle these cases with full discretion and no judgment. Our social worker partners can also refer cases directly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: WHAT TO SAY -->
+  <div class="tab-panel" id="panel-2">
+    <div class="container">
+      <div class="animate">
+        <p class="section-label">Scripts You Can Use</p>
+        <h2 style="margin-bottom:8px;">Exact words for difficult conversations.</h2>
+        <div class="divider"></div>
+        <p style="margin-bottom:40px; max-width:680px;">Below are calm, firm scripts you can use when a funeral director pressures you about your casket choice. You do not need to be aggressive — just clear and prepared.</p>
+
+        <h3 style="margin-bottom:20px; font-size:1.1rem;">Scenario 1: The director insists you use their casket</h3>
+        <div class="script-card">
+          <p class="script-card__label">You say:</p>
+          <p class="script-card__text">"We have already arranged our casket separately through a licensed supplier. We understand we have the right to do so under Singapore's consumer protection guidelines. We'd like to proceed with your services using our casket. Please confirm you're able to accommodate this."</p>
+        </div>
+
+        <h3 style="margin-bottom:20px; font-size:1.1rem;">Scenario 2: The director says they'll charge extra for an "outside" casket</h3>
+        <div class="script-card">
+          <p class="script-card__label">You say:</p>
+          <p class="script-card__text">"We'd like a written itemisation of all fees, including any surcharge for using an external casket. We'll need this before confirming any agreement. If there is a casket-sourcing surcharge that cannot be justified, we may need to escalate to CASE."</p>
+        </div>
+
+        <h3 style="margin-bottom:20px; font-size:1.1rem;">Scenario 3: The director says the package doesn't include service if you bring your own casket</h3>
+        <div class="script-card">
+          <p class="script-card__label">You say:</p>
+          <p class="script-card__text">"We understand you may have a preferred supplier. However, conditioning funeral services on casket purchase is a practice we are aware falls under the Consumer Protection (Fair Trading) Act. We'd prefer to resolve this amicably. If not, we are prepared to engage another director and report this to CASE."</p>
+        </div>
+
+        <h3 style="margin-bottom:20px; font-size:1.1rem;">Scenario 4: You're asked to decide quickly on a casket from their showroom</h3>
+        <div class="script-card">
+          <p class="script-card__label">You say:</p>
+          <p class="script-card__text">"We appreciate the options. We need a few minutes to discuss privately. Can you give us the itemised price list and step out briefly? We'll make a decision before we leave."</p>
+        </div>
+
+        <div class="rights-alert" style="margin-top:40px;">
+          <h3>CASE Hotline</h3>
+          <p>If a funeral director engages in unfair tactics, you can report to the <strong>Consumers Association of Singapore (CASE)</strong> at <strong>1800-773-3518</strong> or via their website. You can also call us at <strong>+65 8000 1234</strong> and we will do our best to help you navigate the situation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 4: QUALITY -->
+  <div class="tab-panel" id="panel-3">
+    <div class="container">
+      <div class="animate">
+        <div class="accordion">
+          <button class="accordion__trigger">
+            <span class="accordion__question">Are Passage caskets of comparable quality to those in funeral packages?</span>
+            <span class="accordion__icon">+</span>
+          </button>
+          <div class="accordion__body">
+            <div class="accordion__content">
+              <p>Yes — and often better at the same price point. Our caskets use FSC-certified timber and are assembled in Singapore by skilled local craftspeople under Progressive Wage Model standards. Many funeral package caskets at the same price tier are imported flat-pack products with cheaper materials.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion">
+          <button class="accordion__trigger">
+            <span class="accordion__question">Are your caskets certified or accredited?</span>
+            <span class="accordion__icon">+</span>
+          </button>
+          <div class="accordion__body">
+            <div class="accordion__content">
+              <p>All Passage caskets use FSC-certified timber (Forest Stewardship Council), ensuring responsible sourcing. Our operations are aligned with the Tripartite Standards pledge on fair employment, and we are enrolled in the Progressive Wage Model for local workers. See our <a href="accreditation.html" style="color:var(--gold);">Accreditation page</a> for full details.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion">
+          <button class="accordion__trigger">
+            <span class="accordion__question">What if there's an issue with the casket after delivery?</span>
+            <span class="accordion__icon">+</span>
+          </button>
+          <div class="accordion__body">
+            <div class="accordion__content">
+              <p>We stand behind every casket we deliver. In the extremely unlikely event of a defect, call us immediately at <strong>+65 8000 1234</strong> and we will dispatch a replacement or rectify the issue within the hour. We have never had a customer leave unsatisfied.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion">
+          <button class="accordion__trigger">
+            <span class="accordion__question">Do you deliver to HDB void decks, columbaria, and funeral parlours?</span>
+            <span class="accordion__icon">+</span>
+          </button>
+          <div class="accordion__body">
+            <div class="accordion__content">
+              <p>Yes — we deliver to all common funeral venues in Singapore, including HDB void decks, funeral parlours, churches, temples, columbaria, and private residences. Our team is experienced with access logistics for all building types.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 5: TESTIMONIALS -->
+  <div class="tab-panel" id="panel-4">
+    <div class="container">
+      <div class="animate" style="margin-bottom:40px;">
+        <p class="section-label">Families We've Served</p>
+        <h2>Real experiences. Real families.</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="testimonials-grid animate">
+
+        <div class="testimonial">
+          <div class="testimonial__stars">★★★★★</div>
+          <p class="testimonial__body">"When my father passed, we were overwhelmed. The funeral director quoted us S$8,800 for the 'basic' package. We found Passage at midnight, ordered the Tranquil casket, and it arrived at our void deck by 6am. Dignified, punctual, and exactly what my father would have wanted — without bankrupting us."</p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">LW</div>
+            <div>
+              <p class="testimonial__name">Lim Wei Ling</p>
+              <p class="testimonial__detail">Ang Mo Kio · March 2025 · Purchased: Tranquil</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial">
+          <div class="testimonial__stars">★★★★★</div>
+          <p class="testimonial__body">"The funeral director first refused to work with our casket. We used exactly the script from the Passage FAQ page. He backed down immediately. We saved S$2,200 which we donated to my father's favourite charity. Passage didn't just save us money — they gave us control at a moment when we had none."</p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">RT</div>
+            <div>
+              <p class="testimonial__name">Ramesh Tamilarasan</p>
+              <p class="testimonial__detail">Woodlands · January 2025 · Purchased: Serene</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial">
+          <div class="testimonial__stars">★★★★★</div>
+          <p class="testimonial__body">"My mother always said she didn't want us to spend excessively on her funeral. Passage made that possible. The Eternal casket was beautiful — the quality genuinely surprised me. When the funeral home staff saw it, they commented it was nicer than what they carry."</p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">SC</div>
+            <div>
+              <p class="testimonial__name">Susan Chew</p>
+              <p class="testimonial__detail">Bedok · December 2024 · Purchased: Eternal</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial">
+          <div class="testimonial__stars">★★★★★</div>
+          <p class="testimonial__body">"As a Buddhist family, we were concerned about the type of wood used. The Passage team explained everything clearly, confirmed the material was appropriate, and the delivery team was respectful of the setup at the void deck. Absolutely no issues."</p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">TH</div>
+            <div>
+              <p class="testimonial__name">Tan Hui Ming</p>
+              <p class="testimonial__detail">Toa Payoh · November 2024 · Purchased: Tranquil</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial">
+          <div class="testimonial__stars">★★★★★</div>
+          <p class="testimonial__body">"I'm a social worker. I referred a family with no income to Passage for the free casket programme. The process was handled with such dignity and discretion — the family felt respected throughout. This social enterprise is genuinely doing what it says."</p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">MN</div>
+            <div>
+              <p class="testimonial__name">Mdm Nora Hassan</p>
+              <p class="testimonial__detail">Social Worker, Geylang · October 2024 · Free casket referral</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial">
+          <div class="testimonial__stars">★★★★★</div>
+          <p class="testimonial__body">"We are a Christian family. The Passage team understood our traditions without us having to explain. They positioned the casket exactly as we needed for the viewing. Simple, professional, and kind — exactly the qualities you want from people helping you during this time."</p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">YP</div>
+            <div>
+              <p class="testimonial__name">Yeo Pei Shan</p>
+              <p class="testimonial__detail">Jurong West · September 2024 · Purchased: Tranquil</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer" style="margin-top:40px;">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <p class="footer__brand">Pass<span>age</span></p>
+          <p class="footer__tagline">"Because grief is burden enough."</p>
+          <p style="font-size:0.8rem; line-height:1.7;">Assembled in Singapore. Sustainably sourced. A social enterprise — 30% of net profits donated to charity.</p>
+        </div>
+        <div class="footer__col"><h5>Products</h5>
+          <a href="products.html#serene">Serene — S$800</a>
+          <a href="products.html#tranquil">Tranquil — S$1,000</a>
+          <a href="products.html#eternal">Eternal — S$1,200</a>
+        </div>
+        <div class="footer__col"><h5>Information</h5>
+          <a href="knowledge.html">Funeral Guide</a>
+          <a href="faq.html">FAQ & Your Rights</a>
+          <a href="accreditation.html">Certifications</a>
+        </div>
+        <div class="footer__col"><h5>Contact</h5>
+          <a href="tel:+6580001234">+65 8000 1234</a>
+          <a href="mailto:care@passage.sg">care@passage.sg</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2025 Passage Caskets Pte. Ltd. · Singapore</p>
+        <div class="footer__badge">
+          <span>Progressive Wage Model</span><span>Tripartite Standards</span><span>FSC Certified</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="scripts.js"></script>
+  <script>
+    const panels = document.querySelectorAll('.tab-panel');
+    const tabs = document.querySelectorAll('.tab-btn');
+    function switchTab(i) {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tabs[i].classList.add('active');
+      panels[i].classList.add('active');
+      // re-trigger animations in newly shown panel
+      panels[i].querySelectorAll('.animate').forEach(el => {
+        if (!el.classList.contains('visible')) el.classList.add('visible');
+      });
+    }
+    // Accordion
+    document.querySelectorAll('.accordion__trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.accordion');
+        const body = item.querySelector('.accordion__body');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.accordion.open').forEach(el => {
+          el.classList.remove('open');
+          el.querySelector('.accordion__body').style.maxHeight = '0';
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          body.style.maxHeight = body.scrollHeight + 'px';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
