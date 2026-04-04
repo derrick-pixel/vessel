@@ -216,6 +216,48 @@
     .mission-charity__text h3 { font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 6px; }
     .mission-charity__text p { font-size: 0.85rem; color: rgba(255,255,255,0.7); line-height: 1.6; }
 
+    /* Employee guide banner */
+    .employee-guide-banner {
+      background: var(--surface-1); border: 1px solid var(--border); border-left: 4px solid var(--gold);
+      border-radius: var(--radius); padding: 16px 20px; margin-bottom: 28px;
+      display: flex; align-items: flex-start; gap: 14px;
+    }
+    .employee-guide-banner__icon { font-size: 1.2rem; margin-top: 1px; flex-shrink: 0; }
+    .employee-guide-banner__text { font-size: 0.85rem; color: var(--secondary); line-height: 1.6; }
+    .employee-guide-banner__text strong { color: var(--primary); }
+
+    /* Giving vote section */
+    .giving-section {
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: 32px 36px; margin-top: 24px;
+    }
+    .giving-section__title { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+    .giving-section__sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 24px; }
+    .giving-how { display: flex; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
+    .giving-step {
+      flex: 1; min-width: 160px; background: var(--surface-1); border-radius: var(--radius);
+      padding: 16px 18px; border: 1px solid var(--border);
+    }
+    .giving-step__num { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; color: var(--gold); margin-bottom: 6px; }
+    .giving-step__text { font-size: 0.82rem; color: var(--secondary); line-height: 1.55; }
+    .giving-focus { margin-bottom: 0; }
+    .giving-focus__label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--secondary); margin-bottom: 12px; }
+    .giving-ecosystem { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; }
+    .ecosystem-card {
+      border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px;
+      background: var(--surface);
+    }
+    .ecosystem-card__icon { font-size: 1.2rem; margin-bottom: 6px; }
+    .ecosystem-card__name { font-size: 0.85rem; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+    .ecosystem-card__desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+    .ecosystem-card.preferred { border-color: var(--gold); background: #fdf8f1; }
+    .ecosystem-card.preferred .ecosystem-card__name::after { content: ' ★'; color: var(--gold); font-size: 0.7rem; }
+    .giving-note {
+      margin-top: 20px; padding: 14px 18px; background: var(--surface-1);
+      border-radius: var(--radius); border-left: 3px solid var(--secondary);
+      font-size: 0.83rem; color: var(--secondary); line-height: 1.65;
+    }
+
     @media (max-width: 768px) {
       .stats-bar { grid-template-columns: repeat(2,1fr); }
       .form-grid { grid-template-columns: 1fr; }
@@ -526,6 +568,16 @@
     <!-- ── MISSION PANEL ── -->
     <div id="admin-panel-mission" class="admin-panel">
 
+      <div class="employee-guide-banner">
+        <div class="employee-guide-banner__icon">📋</div>
+        <div class="employee-guide-banner__text">
+          <strong>For all PASSAGE team members — current and new.</strong><br>
+          This page exists so every person on the team understands not just what we do, but <em>why</em> we do it.
+          Read this when you join. Return to it when things feel unclear. The decisions we make daily — from
+          how we answer a customer's call to which supplier we choose — all trace back to what is written here.
+        </div>
+      </div>
+
       <div class="mission-hero">
         <p class="mission-hero__label">Founder's Note</p>
         <p class="mission-hero__quote">
@@ -600,9 +652,76 @@
       <div class="mission-charity">
         <div class="mission-charity__pct">30<span>%</span></div>
         <div class="mission-charity__text">
-          <h3>Profits Fund Those in Need</h3>
-          <p>30% of every order's profit goes towards subsidising caskets for low-income Singaporean families, or is donated to registered welfare charities. Because dignity in death should not be a privilege.</p>
+          <h3>30% of Profits Back to the Community</h3>
+          <p>Every quarter, 30% of PASSAGE's net profit is allocated to causes chosen by our team leaders through a structured vote. Because dignity in death should not be a privilege.</p>
         </div>
+      </div>
+
+      <div class="giving-section">
+        <p class="giving-section__title">How the 30% Giving Works</p>
+        <p class="giving-section__sub">Employee leaders — not just management — have a voice in where this goes. Here is the process and the guiding principle.</p>
+
+        <div class="giving-how">
+          <div class="giving-step">
+            <div class="giving-step__num">01</div>
+            <div class="giving-step__text"><strong>Quarterly cadence.</strong> At the end of each quarter, team leaders are invited to nominate a cause or organisation.</div>
+          </div>
+          <div class="giving-step">
+            <div class="giving-step__num">02</div>
+            <div class="giving-step__text"><strong>Team vote.</strong> All nominated causes go to a simple majority vote among participating team leaders. Every leader gets one equal vote.</div>
+          </div>
+          <div class="giving-step">
+            <div class="giving-step__num">03</div>
+            <div class="giving-step__text"><strong>Allocation & transparency.</strong> The chosen cause receives the quarter's 30% share. The amount and recipient are shared with the whole team.</div>
+          </div>
+          <div class="giving-step">
+            <div class="giving-step__num">04</div>
+            <div class="giving-step__text"><strong>Reinvest the ecosystem.</strong> The strong preference is to give back to the same circle of care that our customers live in.</div>
+          </div>
+        </div>
+
+        <div class="giving-focus">
+          <p class="giving-focus__label">Preferred Giving Ecosystem — causes we lean towards</p>
+          <div class="giving-ecosystem">
+            <div class="ecosystem-card preferred">
+              <div class="ecosystem-card__icon">🏥</div>
+              <div class="ecosystem-card__name">Hospice Care</div>
+              <div class="ecosystem-card__desc">Palliative support for the terminally ill. The closest link to the families we serve.</div>
+            </div>
+            <div class="ecosystem-card preferred">
+              <div class="ecosystem-card__icon">👴</div>
+              <div class="ecosystem-card__name">Eldercare</div>
+              <div class="ecosystem-card__desc">Day care, befriending, and welfare services for elderly Singaporeans, especially the isolated.</div>
+            </div>
+            <div class="ecosystem-card preferred">
+              <div class="ecosystem-card__icon">💰</div>
+              <div class="ecosystem-card__name">Casket Subsidies</div>
+              <div class="ecosystem-card__desc">Directly subsidising PASSAGE caskets for low-income families who cannot afford end-of-life costs.</div>
+            </div>
+            <div class="ecosystem-card preferred">
+              <div class="ecosystem-card__icon">🧠</div>
+              <div class="ecosystem-card__name">Grief Counselling</div>
+              <div class="ecosystem-card__desc">Funding free or subsidised grief support for bereaved families in Singapore.</div>
+            </div>
+            <div class="ecosystem-card">
+              <div class="ecosystem-card__icon">🍱</div>
+              <div class="ecosystem-card__name">Food Aid</div>
+              <div class="ecosystem-card__desc">Meal support programmes for elderly or low-income households. Adjacent to our care ecosystem.</div>
+            </div>
+            <div class="ecosystem-card">
+              <div class="ecosystem-card__icon">📚</div>
+              <div class="ecosystem-card__name">Death Literacy</div>
+              <div class="ecosystem-card__desc">Programmes that help Singaporeans plan ahead — advance care planning, wills, and CPF nomination awareness.</div>
+            </div>
+          </div>
+        </div>
+
+        <p class="giving-note">
+          <strong>The guiding principle:</strong> Our 30% should flow back into the same ecosystem our customers live in —
+          people facing the end of life, those left behind, and those who care for them.
+          A vote that strays far from this (e.g. unrelated causes) should prompt a conversation, not a veto —
+          but the spirit of this fund is to <em>close the circle of care</em> that PASSAGE is part of.
+        </p>
       </div>
 
     </div><!-- end #admin-panel-mission -->
