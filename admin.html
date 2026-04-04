@@ -559,6 +559,19 @@
     document.getElementById('stat-done').textContent    = orders.filter(o=>o.status==='delivered').length;
   }
 
+  // Seed demo orders if none exist
+  const SEED_ORDERS = [
+    { id:'ORD-001', date:'2025-03-05', sub:'Millennium Casket (JB)', model:'Serene (Pine)', qty:5, unit:220, total:1100, delivery:'2025-03-12', status:'delivered', notes:'FSC pine, natural lacquer, Passage brass nameplate. Delivered to StorHub Woodlands unit B12. All 5 units passed QC.' },
+    { id:'ORD-002', date:'2025-03-05', sub:'Millennium Casket (JB)', model:'Tranquil (Hardwood)', qty:3, unit:310, total:930, delivery:'2025-03-12', status:'delivered', notes:'Satin walnut stain, ivory velvet lining. Delivered with ORD-001. Minor surface scratch on unit 2 — rectified on-site.' },
+    { id:'ORD-003', date:'2025-03-18', sub:'Zhen Feng Object Workshop (SG)', model:'Eternal (Mahogany)', qty:2, unit:480, total:960, delivery:'2025-03-25', status:'delivered', notes:'Hand-polished dark mahogany, brass 8-point handles. Local SG assembly. Both units passed QC. Customer (Tan family, Bedok) satisfied.' },
+    { id:'ORD-004', date:'2025-03-22', sub:'The Eco Casket (Selangor)', model:'Eco Green', qty:2, unit:155, total:310, delivery:'2025-03-29', status:'delivered', notes:'Trial order for eco tier. Finoboard construction. Confirmed cremation-compatible. Good feedback — consider adding to product catalogue.' },
+    { id:'ORD-005', date:'2025-04-01', sub:'Millennium Casket (JB)', model:'Serene (Pine)', qty:8, unit:215, total:1720, delivery:'2025-04-08', status:'production', notes:'Restocking buffer. Revised unit cost negotiated down from S$220. Confirm FSC certificate batch number before delivery.' },
+    { id:'ORD-006', date:'2025-04-01', sub:'Millennium Casket (JB)', model:'Tranquil (Hardwood)', qty:4, unit:300, total:1200, delivery:'2025-04-08', status:'production', notes:'Restocking. Same batch as ORD-005. Request velvet lining in ivory only — previous batch had one off-white unit.' },
+    { id:'ORD-007', date:'2025-04-03', sub:'White Artz Carpentry (SG)', model:'Eternal (Mahogany)', qty:1, unit:520, total:520, delivery:'2025-04-10', status:'quality', notes:'Custom order — Lim family, Toa Payoh. Extra hand-engraving on nameplate. QC in progress at workshop. Collect Thursday.' },
+    { id:'ORD-008', date:'2025-04-04', sub:'TSTee Wood Industry (Kedah)', model:'Serene (Pine)', qty:10, unit:195, total:1950, delivery:'2025-04-18', status:'pending', notes:'Bulk trial with TSTee. MOQ met. Awaiting OEM agreement sign-off and FSC batch documentation. Lower unit cost — evaluate vs Millennium quality.' },
+  ];
+  if (!getOrders().length) saveOrders(SEED_ORDERS);
+
   // Init if already logged in
   if (sessionStorage.getItem('admin_auth') === '1') {
     renderOrders();
