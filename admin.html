@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Passage — Admin</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #32332d;
+      --secondary: #596060;
+      --gold: #725b3f;
+      --surface: #fcf9f5;
+      --surface-1: #f0ece4;
+      --surface-2: #e4e0d8;
+      --border: #d8d4cc;
+      --muted: #7b7b74;
+      --white: #ffffff;
+      --green: #3a7a50;
+      --amber: #b07020;
+      --blue: #2a5080;
+      --red: #8b2020;
+      --purple: #5a3878;
+      --radius: 8px;
+      --radius-lg: 14px;
+      --font: 'Segoe UI', system-ui, sans-serif;
+      --serif: Georgia, 'Times New Roman', serif;
+    }
+    body { font-family: var(--font); background: var(--surface); color: var(--primary); min-height: 100vh; }
+
+    /* ── LOGIN ── */
+    #login-screen {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      background: var(--primary);
+    }
+    .login-box {
+      background: var(--white); border-radius: var(--radius-lg);
+      padding: 48px 40px; width: 100%; max-width: 380px;
+      box-shadow: 0 24px 48px rgba(0,0,0,0.3);
+    }
+    .login-logo { font-family: var(--serif); font-size: 1.8rem; font-weight: 700; color: var(--primary); letter-spacing: 0.08em; margin-bottom: 4px; }
+    .login-logo span { color: var(--gold); }
+    .login-sub { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 32px; }
+    .login-box label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; margin-top: 16px; }
+    .login-box input { width: 100%; padding: 11px 14px; border: 1.5px solid var(--border); border-radius: var(--radius); font-size: 0.95rem; font-family: var(--font); outline: none; transition: border-color 0.2s; background: var(--surface); }
+    .login-box input:focus { border-color: var(--secondary); }
+    .login-btn { width: 100%; margin-top: 24px; padding: 12px; background: var(--primary); color: var(--white); border: none; border-radius: var(--radius); font-size: 0.9rem; font-weight: 600; letter-spacing: 0.06em; cursor: pointer; transition: background 0.2s; }
+    .login-btn:hover { background: var(--secondary); }
+    .login-error { color: var(--red); font-size: 0.82rem; margin-top: 12px; display: none; }
+
+    /* ── DASHBOARD ── */
+    #dashboard { display: none; }
+    .admin-topbar {
+      background: var(--primary); padding: 0 28px; height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .admin-topbar__logo { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; color: var(--white); letter-spacing: 0.08em; }
+    .admin-topbar__logo span { color: var(--gold); }
+    .admin-topbar__right { display: flex; align-items: center; gap: 16px; }
+    .admin-topbar__user { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
+    .logout-btn { font-size: 0.78rem; padding: 6px 14px; background: rgba(255,255,255,0.1); color: var(--white); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; cursor: pointer; transition: background 0.2s; }
+    .logout-btn:hover { background: rgba(255,255,255,0.2); }
+
+    .admin-body { max-width: 1200px; margin: 0 auto; padding: 32px 28px 80px; }
+
+    /* Stats bar */
+    .stats-bar { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 40px; }
+    .stat-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 22px; }
+    .stat-card__val { font-family: var(--serif); font-size: 2rem; font-weight: 700; line-height: 1; margin-bottom: 4px; }
+    .stat-card__label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .stat-pending { color: var(--amber); }
+    .stat-prod { color: var(--blue); }
+    .stat-done { color: var(--green); }
+    .stat-total { color: var(--primary); }
+
+    /* Section headings */
+    .section-heading { font-family: var(--serif); font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
+    .section-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 20px; }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+    /* Subcontractor cards */
+    .sub-region { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--secondary); margin-bottom: 12px; margin-top: 28px; }
+    .sub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 8px; }
+    .sub-card {
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: 20px; transition: box-shadow 0.2s;
+    }
+    .sub-card:hover { box-shadow: 0 4px 16px rgba(50,51,45,0.1); }
+    .sub-card__header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; }
+    .sub-card__name { font-size: 0.95rem; font-weight: 700; color: var(--primary); }
+    .sub-card__type { font-size: 0.7rem; background: var(--surface-1); color: var(--muted); padding: 3px 8px; border-radius: 12px; }
+    .sub-card__location { font-size: 0.78rem; color: var(--muted); margin-bottom: 8px; }
+    .sub-card__specialty { font-size: 0.82rem; color: var(--secondary); line-height: 1.5; margin-bottom: 12px; }
+    .sub-card__cost { background: var(--surface-1); border-radius: 6px; padding: 8px 12px; margin-bottom: 12px; }
+    .sub-card__cost-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+    .sub-card__cost-val { font-size: 0.88rem; font-weight: 700; color: var(--gold); margin-top: 2px; }
+    .sub-card__links { display: flex; flex-wrap: wrap; gap: 6px; }
+    .sub-link { font-size: 0.75rem; color: var(--secondary); text-decoration: none; background: var(--surface-1); padding: 4px 10px; border-radius: 12px; border: 1px solid var(--border); transition: background 0.15s; }
+    .sub-link:hover { background: var(--surface-2); }
+    .sub-card__note { font-size: 0.75rem; color: var(--muted); margin-top: 10px; line-height: 1.5; border-top: 1px solid var(--border); padding-top: 10px; font-style: italic; }
+
+    /* Order tracker */
+    .new-order-form {
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: 24px; margin-bottom: 24px;
+    }
+    .form-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 5px; }
+    .form-group label { font-size: 0.72rem; font-weight: 600; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.08em; }
+    .form-group input, .form-group select, .form-group textarea {
+      padding: 8px 11px; border: 1.5px solid var(--border); border-radius: var(--radius);
+      font-size: 0.875rem; font-family: var(--font); outline: none; transition: border-color 0.2s; background: var(--surface);
+    }
+    .form-group input:focus, .form-group select:focus { border-color: var(--secondary); }
+    .form-group.span2 { grid-column: span 2; }
+    .form-group.span3 { grid-column: span 3; }
+    .add-btn { margin-top: 16px; padding: 10px 24px; background: var(--primary); color: var(--white); border: none; border-radius: var(--radius); font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .add-btn:hover { background: var(--secondary); }
+
+    /* Orders table */
+    .orders-table-wrap { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+    .orders-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    .orders-table th { background: var(--primary); color: var(--white); padding: 12px 14px; text-align: left; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+    .orders-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    .orders-table tr:last-child td { border-bottom: none; }
+    .orders-table tr:hover td { background: var(--surface); }
+    .orders-empty { text-align: center; padding: 40px; color: var(--muted); font-size: 0.9rem; }
+
+    /* Status badges */
+    .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+    .badge-pending  { background: #fff3cd; color: var(--amber); }
+    .badge-production { background: #dbeafe; color: var(--blue); }
+    .badge-quality  { background: #ede9fe; color: var(--purple); }
+    .badge-delivered { background: #dcfce7; color: var(--green); }
+    .badge-issue    { background: #fee2e2; color: var(--red); }
+
+    .action-btn { font-size: 0.72rem; padding: 4px 10px; border: 1px solid var(--border); border-radius: 6px; cursor: pointer; background: var(--surface); color: var(--secondary); transition: all 0.15s; }
+    .action-btn:hover { background: var(--surface-2); }
+    .action-btn.del { color: var(--red); border-color: #fca5a5; }
+    .action-btn.del:hover { background: #fee2e2; }
+
+    .status-select { font-size: 0.78rem; padding: 4px 8px; border: 1px solid var(--border); border-radius: 6px; cursor: pointer; background: var(--surface); font-family: var(--font); }
+
+    @media (max-width: 768px) {
+      .stats-bar { grid-template-columns: repeat(2,1fr); }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.span2, .form-group.span3 { grid-column: span 1; }
+      .orders-table { font-size: 0.78rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── LOGIN ── -->
+<div id="login-screen">
+  <div class="login-box">
+    <p class="login-logo">PASS<span>AGE</span></p>
+    <p class="login-sub">Admin Portal</p>
+    <form onsubmit="doLogin(event)">
+      <label for="un">Username</label>
+      <input id="un" type="text" placeholder="Username" autocomplete="off" />
+      <label for="pw">Password</label>
+      <input id="pw" type="password" placeholder="Password" />
+      <button class="login-btn" type="submit">Sign In</button>
+      <p class="login-error" id="login-err">Incorrect username or password.</p>
+    </form>
+  </div>
+</div>
+
+<!-- ── DASHBOARD ── -->
+<div id="dashboard">
+  <div class="admin-topbar">
+    <span class="admin-topbar__logo">PASS<span>AGE</span> &nbsp;·&nbsp; <span style="font-family:sans-serif; font-size:0.7rem; color:rgba(255,255,255,0.5); font-weight:400; letter-spacing:0.1em;">ADMIN</span></span>
+    <div class="admin-topbar__right">
+      <span class="admin-topbar__user">Signed in as <strong style="color:rgba(255,255,255,0.85);">elitez</strong></span>
+      <button class="logout-btn" onclick="doLogout()">Sign Out</button>
+    </div>
+  </div>
+
+  <div class="admin-body">
+
+    <!-- Stats -->
+    <div class="stats-bar" id="stats-bar">
+      <div class="stat-card"><div class="stat-card__val stat-total" id="stat-total">0</div><div class="stat-card__label">Total Orders</div></div>
+      <div class="stat-card"><div class="stat-card__val stat-pending" id="stat-pending">0</div><div class="stat-card__label">Pending</div></div>
+      <div class="stat-card"><div class="stat-card__val stat-prod" id="stat-prod">0</div><div class="stat-card__label">In Production</div></div>
+      <div class="stat-card"><div class="stat-card__val stat-done" id="stat-done">0</div><div class="stat-card__label">Delivered</div></div>
+    </div>
+
+    <!-- ── SUBCONTRACTORS ── -->
+    <div class="section-heading">Subcontractor Directory</div>
+    <p class="section-sub">Researched suppliers and carpenters. Estimated costs are wholesale/subcontract rates — confirm directly before committing orders.</p>
+
+    <div class="sub-region">🇲🇾 Malaysia — JB & Regional</div>
+    <div class="sub-grid">
+
+      <div class="sub-card">
+        <div class="sub-card__header">
+          <span class="sub-card__name">Millennium Casket Sdn. Bhd.</span>
+          <span class="sub-card__type">Casket Mfr</span>
+        </div>
+        <div class="sub-card__location">📍 Johor Bahru, Johor, Malaysia</div>
+        <div class="sub-card__specialty">Custom wood caskets for Buddhist, Taoist, Christian & Indian traditions. 20+ years in business. Supply to Singapore funeral homes.</div>
+        <div class="sub-card__cost">
+          <div class="sub-card__cost-label">Est. Wholesale / Unit</div>
+          <div class="sub-card__cost-val">RM 400 – RM 900 &nbsp;(≈ S$130 – S$295)</div>
+        </div>
+        <div class="sub-card__links">
+          <a href="https://www.millenniumcasket.com/" target="_blank" rel="noopener" class="sub-link">🌐 millenniumcasket.com</a>
+          <a href="https://www.instagram.com/millenniumcasket.jb/" target="_blank" rel="noopener" class="sub-link">📷 Instagram</a>
+          <a href="tel:+601271732020" class="sub-link">📞 +60 12-717 3202</a>
+        </div>
+        <p class="sub-card__note">Closest JB supplier. Recommend visiting in person to inspect joinery and finish. Ask for MOQ and OEM (Passage branding) pricing.</p>
+      </div>
+
+      <div class="sub-card">
+        <div class="sub-card__header">
+          <span class="sub-card__name">TSTee Wood Industry (Sinseeseng)</span>
+          <span class="sub-card__type">Wholesale Mfr</span>
+        </div>
+        <div class="sub-card__location">📍 Sungai Petani, Kedah, Malaysia (ships nationally)</div>
+        <div class="sub-card__specialty">Major international casket manufacturer since 1978. Full range: pine, hardwood, mahogany, European & American styles. Ships to Singapore distributors.</div>
+        <div class="sub-card__cost">
+          <div class="sub-card__cost-label">Est. Wholesale / Unit (MOQ 5+)</div>
+          <div class="sub-card__cost-val">RM 350 – RM 1,200 &nbsp;(≈ S$115 – S$395)</div>
+        </div>
+        <div class="sub-card__links">
+          <a href="http://www.sinseeseng.com/" target="_blank" rel="noopener" class="sub-link">🌐 sinseeseng.com</a>
+          <a href="https://tstee.en.ec21.com/" target="_blank" rel="noopener" class="sub-link">🛒 EC21 Profile</a>
+          <a href="https://www.facebook.com/tsteewood/" target="_blank" rel="noopener" class="sub-link">📘 Facebook</a>
+        </div>
+        <p class="sub-card__note">Best for volume and consistent quality. Not JB-based but ships. International OEM experience — can put Passage branding. Request catalogue and minimum order terms.</p>
+      </div>
+
+      <div class="sub-card">
+        <div class="sub-card__header">
+          <span class="sub-card__name">The Eco Casket</span>
+          <span class="sub-card__type">Eco / Paper</span>
+        </div>
+        <div class="sub-card__location">📍 Salak Tinggi, Selangor, Malaysia</div>
+        <div class="sub-card__specialty">Biodegradable caskets from patented ISO-certified Finoboard (recycled corrugated paper). Supports up to 700kg. FSC-aligned. Strong ESG story.</div>
+        <div class="sub-card__cost">
+          <div class="sub-card__cost-label">Est. Wholesale / Unit</div>
+          <div class="sub-card__cost-val">RM 300 – RM 650 &nbsp;(≈ S$100 – S$215)</div>
+        </div>
+        <div class="sub-card__links">
+          <a href="https://www.theecocasket.com/" target="_blank" rel="noopener" class="sub-link">🌐 theecocasket.com</a>
+          <a href="mailto:myecocasket@gmail.com" class="sub-link">✉️ myecocasket@gmail.com</a>
+          <a href="tel:+60163199391" class="sub-link">📞 +60 16-319 9391</a>
+        </div>
+        <p class="sub-card__note">Strong differentiator for eco-conscious families. Consider as a 4th product tier (Passage Green). Check if suitable for Buddhist/Taoist cremation requirements.</p>
+      </div>
+
+      <div class="sub-card">
+        <div class="sub-card__header">
+          <span class="sub-card__name">PK Furniture System Sdn Bhd</span>
+          <span class="sub-card__type">Carpentry</span>
+        </div>
+        <div class="sub-card__location">📍 Johor Bahru, Johor, Malaysia</div>
+        <div class="sub-card__specialty">General carpentry and custom woodworking. Suitable for custom casket assembly if provided with Passage specification drawings and materials.</div>
+        <div class="sub-card__cost">
+          <div class="sub-card__cost-label">Est. Labour / Unit (assembly only)</div>
+          <div class="sub-card__cost-val">RM 250 – RM 600 &nbsp;(≈ S$80 – S$200)</div>
+        </div>
+        <div class="sub-card__links">
+          <a href="https://m.pk2u.com.my/" target="_blank" rel="noopener" class="sub-link">🌐 pk2u.com.my</a>
+        </div>
+        <p class="sub-card__note">Use as assembly-only subcontractor if you supply timber and hardware separately. Lower per-unit cost but requires more coordination from your side.</p>
+      </div>
+
+    </div>
+
+    <div class="sub-region">🇸🇬 Singapore — Local Carpenter Workshops</div>
+    <div class="sub-grid">
+
+      <div class="sub-card">
+        <div class="sub-card__header">
+          <span class="sub-card__name">White Artz Carpentry</span>
+          <span class="sub-card__type">SG Carpenter</span>
+        </div>
+        <div class="sub-card__location">📍 61 Woodlands Industrial Park E9 #02-28, S757047</div>
+        <div class="sub-card__specialty">Direct-factory custom carpentry. Publishes transparent pricing. Suitable for premium Eternal tier local finishing and custom woodwork.</div>
+        <div class="sub-card__cost">
+          <div class="sub-card__cost-label">Est. Labour + Materials / Unit</div>
+          <div class="sub-card__cost-val">S$350 – S$700</div>
+        </div>
+        <div class="sub-card__links">
+          <a href="https://whiteartz.com/" target="_blank" rel="noopener" class="sub-link">🌐 whiteartz.com</a>
+          <a href="tel:+6585404303" class="sub-link">📞 8540-4303</a>
+          <a href="tel:+6564819103" class="sub-link">📞 6481-9103</a>
+        </div>
+        <p class="sub-card__note">Transparent pricing model aligns with Passage values. Recommend for Eternal tier "assembled in Singapore" positioning. Visit workshop to assess bench skills.</p>
+      </div>
+
+      <div class="sub-card">
+        <div class="sub-card__header">
+          <span class="sub-card__name">Soon Teck WoodWorks</span>
+          <span class="sub-card__type">SG Carpenter</span>
+        </div>
+        <div class="sub-card__location">📍 Woodlands Industrial Park E1, Singapore</div>
+        <div class="sub-card__specialty">Established furniture contractor with own workshop. Capable of custom production work. Experienced with hardwood joinery and finishing.</div>
+        <div class="sub-card__cost">
+          <div class="sub-card__cost-label">Est. Labour + Materials / Unit</div>
+          <div class="sub-card__cost-val">S$300 – S$600</div>
+        </div>
+        <div class="sub-card__links">
+          <a href="https://carpentrydirect.sg/" target="_blank" rel="noopener" class="sub-link">🌐 carpentrydirect.sg</a>
+        </div>
+        <p class="sub-card__note">Strong production capacity. Contact to discuss custom piece-rate pricing for casket assembly. Ask for a trial unit.</p>
+      </div>
+
+      <div class="sub-card">
+        <div class="sub-card__header">
+          <span class="sub-card__name">Roger & Sons</span>
+          <span class="sub-card__type">SG Carpenter</span>
+        </div>
+        <div class="sub-card__location">📍 Woodlands, Singapore (workshop + Jalan Besar showroom)</div>
+        <div class="sub-card__specialty">21-person team of designers and craftspeople. FSC-aligned, sustainable sourcing. Made-in-Singapore positioning. Premium finish quality.</div>
+        <div class="sub-card__cost">
+          <div class="sub-card__cost-label">Est. Labour + Materials / Unit</div>
+          <div class="sub-card__cost-val">S$500 – S$900</div>
+        </div>
+        <div class="sub-card__links">
+          <a href="https://www.rogersons.com.sg/" target="_blank" rel="noopener" class="sub-link">🌐 rogersons.com.sg</a>
+        </div>
+        <p class="sub-card__note">Higher cost but strong brand alignment — both FSC, Singapore-made, ethical. Best suited for Eternal tier. Approach as a partnership, not just subcontract.</p>
+      </div>
+
+      <div class="sub-card">
+        <div class="sub-card__header">
+          <span class="sub-card__name">Zhen Feng Object Workshop</span>
+          <span class="sub-card__type">SG Carpenter</span>
+        </div>
+        <div class="sub-card__location">📍 3024 Ubi Road 3 #03-77, Kampong Ubi Industrial Estate, S408652</div>
+        <div class="sub-card__specialty">CNC router + carpentry. Processes bamboo composite, plywood, solid wood. Est. 2016. Good for precision custom parts and finishing work.</div>
+        <div class="sub-card__cost">
+          <div class="sub-card__cost-label">Est. Labour + Materials / Unit</div>
+          <div class="sub-card__cost-val">S$200 – S$500</div>
+        </div>
+        <div class="sub-card__links">
+          <a href="https://www.zhenfengobjectworkshop.com/" target="_blank" rel="noopener" class="sub-link">🌐 zhenfengobjectworkshop.com</a>
+          <a href="tel:+6587909732" class="sub-link">📞 +65 8790 9732</a>
+          <a href="mailto:zhenfengobjectworkshop@gmail.com" class="sub-link">✉️ Email</a>
+        </div>
+        <p class="sub-card__note">Most competitive SG rate. CNC capability useful for nameplates and precise joinery. Best for Serene/Tranquil tiers if local assembly required.</p>
+      </div>
+
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- ── ORDER TRACKER ── -->
+    <div class="section-heading">Order Tracker</div>
+    <p class="section-sub">Track all subcontractor job orders. Data is saved locally in your browser.</p>
+
+    <div class="new-order-form">
+      <p style="font-size:0.82rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--secondary); margin-bottom:16px;">+ New Order</p>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Subcontractor</label>
+          <select id="o-sub">
+            <option value="">Select supplier</option>
+            <optgroup label="Malaysia">
+              <option>Millennium Casket (JB)</option>
+              <option>TSTee Wood Industry (Kedah)</option>
+              <option>The Eco Casket (Selangor)</option>
+              <option>PK Furniture System (JB)</option>
+            </optgroup>
+            <optgroup label="Singapore">
+              <option>White Artz Carpentry (SG)</option>
+              <option>Soon Teck WoodWorks (SG)</option>
+              <option>Roger & Sons (SG)</option>
+              <option>Zhen Feng Object Workshop (SG)</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Casket Model</label>
+          <select id="o-model">
+            <option value="">Select model</option>
+            <option>Serene (Pine)</option>
+            <option>Tranquil (Hardwood)</option>
+            <option>Eternal (Mahogany)</option>
+            <option>Eco Green</option>
+            <option>Custom</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Quantity (units)</label>
+          <input id="o-qty" type="number" min="1" placeholder="e.g. 5" />
+        </div>
+        <div class="form-group">
+          <label>Unit Cost (S$)</label>
+          <input id="o-unit" type="number" min="0" placeholder="e.g. 250" />
+        </div>
+        <div class="form-group">
+          <label>Order Date</label>
+          <input id="o-date" type="date" />
+        </div>
+        <div class="form-group">
+          <label>Expected Delivery</label>
+          <input id="o-delivery" type="date" />
+        </div>
+        <div class="form-group span3">
+          <label>Notes</label>
+          <input id="o-notes" type="text" placeholder="e.g. FSC pine, natural lacquer, Passage nameplate, deliver to StorHub Woodlands unit B12" />
+        </div>
+      </div>
+      <button class="add-btn" onclick="addOrder()">Add Order</button>
+    </div>
+
+    <div class="orders-table-wrap">
+      <table class="orders-table">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Date</th>
+            <th>Subcontractor</th>
+            <th>Model</th>
+            <th>Qty</th>
+            <th>Unit Cost</th>
+            <th>Total</th>
+            <th>Delivery</th>
+            <th>Status</th>
+            <th>Notes</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="orders-tbody">
+          <tr><td colspan="11" class="orders-empty">No orders yet. Add your first order above.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // ── Auth ──
+  function doLogin(e) {
+    e.preventDefault();
+    const un = document.getElementById('un').value.trim();
+    const pw = document.getElementById('pw').value;
+    if (un === 'elitez' && pw === '123') {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      sessionStorage.setItem('admin_auth', '1');
+      renderOrders();
+      updateStats();
+    } else {
+      document.getElementById('login-err').style.display = 'block';
+    }
+  }
+  function doLogout() {
+    sessionStorage.removeItem('admin_auth');
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('un').value = '';
+    document.getElementById('pw').value = '';
+  }
+  // Stay logged in on page refresh within session
+  if (sessionStorage.getItem('admin_auth') === '1') {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+  }
+
+  // ── Orders ──
+  function getOrders() {
+    return JSON.parse(localStorage.getItem('passage_orders') || '[]');
+  }
+  function saveOrders(orders) {
+    localStorage.setItem('passage_orders', JSON.stringify(orders));
+  }
+  function nextId() {
+    const orders = getOrders();
+    const num = orders.length ? Math.max(...orders.map(o => parseInt(o.id.replace('ORD-','')))) + 1 : 1;
+    return 'ORD-' + String(num).padStart(3, '0');
+  }
+
+  function addOrder() {
+    const sub   = document.getElementById('o-sub').value;
+    const model = document.getElementById('o-model').value;
+    const qty   = parseInt(document.getElementById('o-qty').value) || 0;
+    const unit  = parseFloat(document.getElementById('o-unit').value) || 0;
+    const date  = document.getElementById('o-date').value;
+    const del   = document.getElementById('o-delivery').value;
+    const notes = document.getElementById('o-notes').value.trim();
+    if (!sub || !model || !qty || !date) { alert('Please fill in Subcontractor, Model, Quantity and Order Date.'); return; }
+    const order = { id: nextId(), date, sub, model, qty, unit, total: qty*unit, delivery: del, status: 'pending', notes };
+    const orders = getOrders();
+    orders.unshift(order);
+    saveOrders(orders);
+    // reset form
+    ['o-sub','o-model','o-qty','o-unit','o-date','o-delivery','o-notes'].forEach(id => {
+      const el = document.getElementById(id);
+      el.value = el.tagName === 'SELECT' ? '' : '';
+    });
+    renderOrders();
+    updateStats();
+  }
+
+  function deleteOrder(id) {
+    if (!confirm('Delete order ' + id + '?')) return;
+    saveOrders(getOrders().filter(o => o.id !== id));
+    renderOrders();
+    updateStats();
+  }
+
+  function changeStatus(id, val) {
+    const orders = getOrders();
+    const o = orders.find(o => o.id === id);
+    if (o) { o.status = val; saveOrders(orders); updateStats(); renderOrders(); }
+  }
+
+  const STATUS_LABELS = {
+    pending:    ['Pending',     'badge-pending'],
+    production: ['In Production','badge-production'],
+    quality:    ['Quality Check','badge-quality'],
+    delivered:  ['Delivered',   'badge-delivered'],
+    issue:      ['Issue',       'badge-issue'],
+  };
+
+  function renderOrders() {
+    const orders = getOrders();
+    const tbody = document.getElementById('orders-tbody');
+    if (!orders.length) {
+      tbody.innerHTML = '<tr><td colspan="11" class="orders-empty">No orders yet. Add your first order above.</td></tr>';
+      return;
+    }
+    tbody.innerHTML = orders.map(o => {
+      const [label, cls] = STATUS_LABELS[o.status] || ['Unknown',''];
+      const fmtCost = v => v ? 'S$' + parseFloat(v).toLocaleString('en-SG', {minimumFractionDigits:2}) : '—';
+      return `<tr>
+        <td><strong>${o.id}</strong></td>
+        <td>${o.date || '—'}</td>
+        <td style="font-size:0.82rem;">${o.sub}</td>
+        <td>${o.model}</td>
+        <td style="text-align:center;">${o.qty}</td>
+        <td>${fmtCost(o.unit)}</td>
+        <td><strong>${fmtCost(o.total)}</strong></td>
+        <td style="font-size:0.82rem;">${o.delivery || '—'}</td>
+        <td>
+          <select class="status-select" onchange="changeStatus('${o.id}', this.value)">
+            ${Object.entries(STATUS_LABELS).map(([v,[l]])=>`<option value="${v}"${o.status===v?' selected':''}>${l}</option>`).join('')}
+          </select>
+        </td>
+        <td style="font-size:0.78rem; color:var(--muted); max-width:160px;">${o.notes || '—'}</td>
+        <td><button class="action-btn del" onclick="deleteOrder('${o.id}')">Delete</button></td>
+      </tr>`;
+    }).join('');
+  }
+
+  function updateStats() {
+    const orders = getOrders();
+    document.getElementById('stat-total').textContent   = orders.length;
+    document.getElementById('stat-pending').textContent = orders.filter(o=>o.status==='pending').length;
+    document.getElementById('stat-prod').textContent    = orders.filter(o=>o.status==='production').length;
+    document.getElementById('stat-done').textContent    = orders.filter(o=>o.status==='delivered').length;
+  }
+
+  // Init if already logged in
+  if (sessionStorage.getItem('admin_auth') === '1') {
+    renderOrders();
+    updateStats();
+  }
+
+  // Set today's date as default for order date
+  document.getElementById('o-date').value = new Date().toISOString().split('T')[0];
+</script>
+</body>
+</html>
