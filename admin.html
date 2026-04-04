@@ -142,11 +142,90 @@
 
     .status-select { font-size: 0.78rem; padding: 4px 8px; border: 1px solid var(--border); border-radius: 6px; cursor: pointer; background: var(--surface); font-family: var(--font); }
 
+    /* ── ADMIN TABS ── */
+    .admin-tabs { display: flex; gap: 4px; margin-bottom: 32px; border-bottom: 2px solid var(--border); padding-bottom: 0; }
+    .admin-tab {
+      padding: 10px 22px; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; border: none; background: none; cursor: pointer;
+      color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -2px;
+      transition: color 0.2s, border-color 0.2s; font-family: var(--font);
+    }
+    .admin-tab:hover { color: var(--primary); }
+    .admin-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .admin-panel { display: none; }
+    .admin-panel.active { display: block; }
+
+    /* ── MISSION PAGE ── */
+    .mission-hero {
+      background: var(--primary); border-radius: var(--radius-lg);
+      padding: 48px 52px; margin-bottom: 32px; position: relative; overflow: hidden;
+    }
+    .mission-hero::before {
+      content: '\201C'; position: absolute; top: -20px; left: 36px;
+      font-family: var(--serif); font-size: 12rem; color: rgba(255,255,255,0.04);
+      line-height: 1; pointer-events: none;
+    }
+    .mission-hero__label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .mission-hero__quote {
+      font-family: var(--serif); font-size: 1.55rem; font-weight: 400; color: var(--white);
+      line-height: 1.65; max-width: 700px; margin-bottom: 24px;
+    }
+    .mission-hero__quote em { color: var(--gold); font-style: normal; }
+    .mission-hero__attr { font-size: 0.82rem; color: rgba(255,255,255,0.45); }
+
+    .mission-story {
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: 36px 40px; margin-bottom: 24px;
+    }
+    .mission-story__title { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; color: var(--primary); margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+    .mission-story p { font-size: 0.93rem; line-height: 1.82; color: var(--secondary); margin-bottom: 16px; }
+    .mission-story p:last-child { margin-bottom: 0; }
+    .mission-story strong { color: var(--primary); }
+
+    .mission-timeline {
+      display: flex; flex-direction: column; gap: 0; margin: 24px 0;
+      border-left: 2px solid var(--border); padding-left: 24px;
+    }
+    .mission-tl-item { position: relative; padding-bottom: 24px; }
+    .mission-tl-item:last-child { padding-bottom: 0; }
+    .mission-tl-item::before {
+      content: ''; position: absolute; left: -31px; top: 4px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--gold); border: 2px solid var(--white);
+      box-shadow: 0 0 0 2px var(--gold);
+    }
+    .mission-tl-year { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+    .mission-tl-text { font-size: 0.9rem; color: var(--secondary); line-height: 1.6; }
+
+    .mission-pillars { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 24px; }
+    .mission-pillar {
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: 24px 22px;
+    }
+    .mission-pillar__icon { font-size: 1.6rem; margin-bottom: 12px; }
+    .mission-pillar__title { font-family: var(--serif); font-size: 1rem; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
+    .mission-pillar__text { font-size: 0.85rem; color: var(--secondary); line-height: 1.6; }
+
+    .mission-charity {
+      background: linear-gradient(135deg, #3a7a50 0%, #2a5a3a 100%);
+      border-radius: var(--radius-lg); padding: 28px 32px;
+      display: flex; align-items: center; gap: 24px;
+    }
+    .mission-charity__pct { font-family: var(--serif); font-size: 3.5rem; font-weight: 700; color: var(--white); line-height: 1; white-space: nowrap; }
+    .mission-charity__pct span { font-size: 1.5rem; }
+    .mission-charity__text h3 { font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+    .mission-charity__text p { font-size: 0.85rem; color: rgba(255,255,255,0.7); line-height: 1.6; }
+
     @media (max-width: 768px) {
       .stats-bar { grid-template-columns: repeat(2,1fr); }
       .form-grid { grid-template-columns: 1fr; }
       .form-group.span2, .form-group.span3 { grid-column: span 1; }
       .orders-table { font-size: 0.78rem; }
+      .mission-hero { padding: 32px 24px; }
+      .mission-hero__quote { font-size: 1.2rem; }
+      .mission-story { padding: 24px 20px; }
+      .mission-pillars { grid-template-columns: 1fr; }
+      .mission-charity { flex-direction: column; text-align: center; gap: 12px; }
     }
   </style>
 </head>
@@ -179,6 +258,15 @@
   </div>
 
   <div class="admin-body">
+
+    <!-- Tab Nav -->
+    <div class="admin-tabs">
+      <button class="admin-tab active" onclick="switchAdminTab('operations')">Operations</button>
+      <button class="admin-tab" onclick="switchAdminTab('mission')">Our Mission</button>
+    </div>
+
+    <!-- ── OPERATIONS PANEL ── -->
+    <div id="admin-panel-operations" class="admin-panel active">
 
     <!-- Stats -->
     <div class="stats-bar" id="stats-bar">
@@ -433,10 +521,104 @@
       </table>
     </div>
 
+    </div><!-- end #admin-panel-operations -->
+
+    <!-- ── MISSION PANEL ── -->
+    <div id="admin-panel-mission" class="admin-panel">
+
+      <div class="mission-hero">
+        <p class="mission-hero__label">Founder's Note</p>
+        <p class="mission-hero__quote">
+          Grief is heavy enough on its own.<br>
+          No family should carry the <em>added weight</em> of confusion,<br>
+          pressure, and hidden costs on top of it.
+        </p>
+        <p class="mission-hero__attr">— The reason PASSAGE exists</p>
+      </div>
+
+      <div class="mission-story">
+        <p class="mission-story__title">Why I Built This</p>
+        <p>
+          Between 2021 and today, I lost <strong>four family members</strong>. Each passing was painful in its own way.
+          But what compounded that pain — what I did not expect and was not prepared for — was what happened
+          the moment we stepped into a funeral home.
+        </p>
+        <p>
+          Every time, my family and I were met with time pressure. Decisions about caskets, packages, and add-ons
+          were pushed on us <strong>within hours of a death</strong>, while we were still in shock. Prices were not displayed.
+          Itemised breakdowns were not offered. When we asked, we were given vague bundle quotes that made it
+          impossible to compare or question. We felt the quiet, suffocating pressure to say yes — because
+          saying no felt disrespectful to the person we had just lost.
+        </p>
+        <p>
+          This happened not once. Not twice. <strong>Four times.</strong>
+          And I know from speaking to others that this is not an unusual experience — it is the norm.
+        </p>
+        <div class="mission-timeline">
+          <div class="mission-tl-item">
+            <div class="mission-tl-year">2021</div>
+            <div class="mission-tl-text">First loss. First encounter with opaque funeral pricing and emotional pressure sales.</div>
+          </div>
+          <div class="mission-tl-item">
+            <div class="mission-tl-year">2022 – 2023</div>
+            <div class="mission-tl-text">Two more family members passed. Each time, the same pattern — no price transparency, no breathing room.</div>
+          </div>
+          <div class="mission-tl-item">
+            <div class="mission-tl-year">2024</div>
+            <div class="mission-tl-text">A fourth loss. By now, I had begun researching casket supply chains, manufacturing costs, and consumer protection law in Singapore.</div>
+          </div>
+          <div class="mission-tl-item">
+            <div class="mission-tl-year">2025 — PASSAGE is born</div>
+            <div class="mission-tl-text">Launched as a social enterprise to sell quality caskets at transparent, published prices — so no grieving family is exploited again.</div>
+          </div>
+        </div>
+        <p>
+          PASSAGE is not just a casket company. It is the answer to a personal question I kept asking:
+          <strong>why can't buying a casket be as straightforward as buying anything else?</strong>
+          The price should be visible. The materials should be honest. The process should be calm.
+        </p>
+      </div>
+
+      <div class="mission-pillars">
+        <div class="mission-pillar">
+          <div class="mission-pillar__icon">🪟</div>
+          <div class="mission-pillar__title">Radical Transparency</div>
+          <div class="mission-pillar__text">Every product is priced publicly, with full material and dimension information. No bundles. No hidden fees. What you see is what you pay.</div>
+        </div>
+        <div class="mission-pillar">
+          <div class="mission-pillar__icon">🌱</div>
+          <div class="mission-pillar__title">Sustainable by Default</div>
+          <div class="mission-pillar__text">FSC-certified timber, low-VOC finishes, and responsibly sourced materials — not as a premium option, but as the standard across all tiers.</div>
+        </div>
+        <div class="mission-pillar">
+          <div class="mission-pillar__icon">🤝</div>
+          <div class="mission-pillar__title">Cost-Efficient with Purpose</div>
+          <div class="mission-pillar__text">By routing production to vetted subcontractors and selling direct, we keep prices low — and direct savings back to families and the community.</div>
+        </div>
+      </div>
+
+      <div class="mission-charity">
+        <div class="mission-charity__pct">30<span>%</span></div>
+        <div class="mission-charity__text">
+          <h3>Profits Fund Those in Need</h3>
+          <p>30% of every order's profit goes towards subsidising caskets for low-income Singaporean families, or is donated to registered welfare charities. Because dignity in death should not be a privilege.</p>
+        </div>
+      </div>
+
+    </div><!-- end #admin-panel-mission -->
+
   </div>
 </div>
 
 <script>
+  // ── Admin Tab Switcher ──
+  function switchAdminTab(tab) {
+    document.querySelectorAll('.admin-tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('admin-panel-' + tab).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+
   // ── Auth ──
   function doLogin(e) {
     e.preventDefault();
