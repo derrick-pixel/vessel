@@ -776,11 +776,12 @@
     sessionStorage.removeItem('admin_auth');
     window.location.href = 'index.html';
   }
-  // Stay logged in on page refresh within session
-  if (sessionStorage.getItem('admin_auth') === '1') {
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('dashboard').style.display = 'block';
-  }
+  // Auth removed — dashboard is open access.
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+  sessionStorage.setItem('admin_auth', '1');
+  renderOrders();
+  updateStats();
 
   // ── Orders ──
   function getOrders() {
