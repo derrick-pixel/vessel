@@ -13,7 +13,10 @@
       "Bash(git commit -m 'Fix religion nav bar transparency on knowledge page:*)",
       "Bash(git commit:*)",
       "Bash(grep:*)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(python3:*)",
+      "Bash(gh repo:*)",
+      "Bash(git remote:*)"
     ]
   }
 }
